@@ -90,7 +90,7 @@
                                     <p class="card-text">
                                         <strong>Grade:</strong>   First-Class Honours  <br>
                                         <strong>Key Courses:</strong> Computational Modelling and Analysis, Reaction Engineering, Process Dynamics and Control,
-                                        Particulate Systems and Seperation Processes <br>
+                                        Particulate Systems and Separation Processes <br>
                                         <strong> Minors:</strong> Programming, Manufacture of Regenerative Medicine Products
                                     </p>
                                 </div>
@@ -110,20 +110,21 @@
                                 <p class="card-text"><small class="text-muted">Sept 2021 - TODAY</small></p>
                                 <ul>
                                     <li>Developed a well-posed formulation of the two fluid model with enhanced physical fidelity for simulation of different types of dispersed multiphase flows. </li>
-                                    <li>Developed a high-order two fluid model solver using discontinious Galerkin method.</li>
-                                    <li>Numerical verification of the developed solvers using the method of manufactured solutions. </li>
+                                    <li>Developed discontinuous Galerkin (DG) method solvers for various multiphysics problems, including two-fluid models, incompressible Navier–Stokes equations, and Cahn–Hilliard equation.</li>
+                                    <li>Performed numerical verification of the developed solvers via the Method of Manufactured Solutions (MMS), assessing convergence rates and discretization error to confirm implementation accuracy. </li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- Experience 2: Teacher Assitant-->
+                        <!-- Experience 2: Teacher Assistant-->
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Teacher Assitant</h5>
+                                <h5 class="card-title">Teacher Assistant</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
                                 <p class="card-text"><small class="text-muted">Sept 2021 - TODAY</small></p>
                                 <ul>
                                     <li> Teaching Assistant for courses related to transport phenomena, numerical methods for solving ODEs and PDEs, and computational methods. </li>
-                                    <li> Courses teached include: Computer Literacy & Programming (NE111/CHE120), Introduction to Computational Methods (NE113) , Continuum Mechanics for Nanotechnology Engineering (NE 318) ,Theory and Application of Transport Phenomena (CHE601)
+                                    <li> Courses taught include: Computer Literacy & Programming (NE111/CHE120), Introduction to Computational Methods (NE113) , Continuum Mechanics for Nanotechnology Engineering (NE 318) ,Theory and Application of Transport Phenomena (CHE601). </li>
+                                    <li> Developed Python-based automated grading scripts for CHE 120 laboratory exercises, incorporating unit  testing, exception handling, and custom feedback generation to streamline and standardize student code assessment.</li>
                                 </ul>
                             </div>
                         </div>
@@ -134,30 +135,7 @@
 
                 <!-- Projects Tab -->
                 <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
-
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <a href="https://github.com/arshia-fazeli/YOUR_DG_EULER_EULER_REPO" target="_blank">
-                                        <img src="assets/bc_anim.gif?raw=true"
-                                            class="img-fluid rounded-start"
-                                            alt="DG Two-Fluid Solver Animation"
-                                            style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Discontinuous Galerkin Solver for Euler–Euler Two-Fluid Model</h5>
-                                        <p class="card-text">
-                                            High-fidelity DG-based finite element solver for simulating dispersed multiphase flows using the Euler–Euler two-fluid model.
-                                            Includes numerical flux handling, stability-enhancing limiters, and method of manufactured solutions for verification.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- Project 1: SIMPLE -->
+                        <!-- SIMPLE FVM project -->
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -170,15 +148,59 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE algorithm</h5>
-                                    <p class="card-text"> Finite-volume method solvers for the 2D incompressible Navier-Stokes equations, implemented using SIMPLE algorithms for velocity-pressure coupling.
-                                    The solver is extended to include scalar transport and reaction source terms.</p>
+                                    <p class="card-text"> Finite-volume method solvers for the 2D incompressible Navier–Stokes equations, implemented using SIMPLE algorithms for velocity–pressure coupling.
+                                        The solver is extended to include scalar transport and reaction source terms and leverages Numba JIT compilation for high-performance execution.</p>
                                     <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank"
                                         class="btn btn-outline-dark btn-p">View Project</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                                        <!-- Project: 1D Euler FVS -->
+                        <!-- TFM DG solver project -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <a href="#" onclick="return false;">
+                                        <img src="assets/bc_anim.gif?raw=true"
+                                            class="img-fluid rounded-start"
+                                            alt="DG Two-Fluid Solver Animation"
+                                            style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Discontinuous Galerkin Solver for Euler–Euler Two-Fluid Model</h5>
+                                        <p class="card-text">
+                                            High-fidelity DG-based finite element solver for simulating dispersed multiphase flows using the two-fluid model.
+                                            Includes numerical flux handling, stability-enhancing limiters, and method of manufactured solutions for verification.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- CH DG solver project -->
+                    <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <a href="#" onclick="return false;">
+                                        <img src="assets/ch_anim.gif?raw=true"
+                                             class="img-fluid rounded-start"
+                                             alt="CH Animation"
+                                             style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard equation</h5>
+                                        <p class="card-text">
+                                            DG-based finite element solver for solving Cahn–Hilliard equation.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- 1D Euler FVS project -->
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -201,7 +223,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 3: INS FVM -->
+                    <!-- INS SCGS FVM project -->
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -214,7 +236,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">Incompressible Navier-Stokes Solver using SCGS algorithm</h5>
-                                    <p class="card-text">Finite-volume method (FVM) solver for the 2D incompressible Navier-Stokes equtions
+                                    <p class="card-text">Finite-volume method (FVM) solver for the 2D incompressible Navier-Stokes equations
                                         implemented using the Symmetric Coupled Gauss–Seidel (SCGS) method. </p>
                                     <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS.git" target="_blank"
                                         class="btn btn-outline-dark btn-p">View Project</a>
@@ -223,6 +245,7 @@
                         </div>
                     </div>
 
+                    <!-- Combustor project -->
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -236,7 +259,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">CFD Simulation of a Side-Dump Combustor with Variable Inlet Angles</h5>
                                     <p class="card-text">Performed CFD simulations of a turbulent airflow in a side-dump combustor using ANSYS CFX and validated results against experimental velocity and turbulence data.
-        Investigated the impact of side-inlet angle on fuel-air mixing and conducted mesh refinement and error analysis to quantify discretization and modeling errors. </p>
+                                        Investigated the impact of side-inlet angle on fuel-air mixing and conducted mesh refinement and error analysis to quantify discretization and modeling errors. </p>
                                 </div>
                             </div>
                         </div>
