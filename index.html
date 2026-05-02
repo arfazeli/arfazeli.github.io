@@ -4,273 +4,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arshia Fazeli | Portfolio</title>
+    <title>Arshia Fazeli | Computational Multiphysics Researcher</title>
+    <meta name="description" content="Arshia Fazeli — PhD candidate in Chemical Engineering at the University of Waterloo, specialising in computational multiphysics, two-fluid models, and discontinuous Galerkin FEM solvers for multiphase flows.">
+    <meta name="keywords" content="Arshia Fazeli, computational multiphysics, two-fluid model, multiphase flow, discontinuous Galerkin, CFD, University of Waterloo, Chemical Engineering, PhD">
+    <meta name="author" content="Arshia Fazeli">
+    <link rel="canonical" href="https://arfazeli.github.io/">
+
+    <!-- Open Graph (for LinkedIn / social sharing) -->
+    <meta property="og:title" content="Arshia Fazeli | Computational Multiphysics Researcher">
+    <meta property="og:description" content="PhD candidate at the University of Waterloo working on well-posed two-fluid models and high-order DG-FEM solvers for dispersed multiphase flows.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arfazeli.github.io/">
+
+    <!-- Structured data: tells Google this is a person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Arshia Fazeli",
+      "url": "https://arfazeli.github.io/",
+      "jobTitle": "PhD Candidate in Chemical Engineering",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Waterloo"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/arshia-fazeli",
+        "https://github.com/arfazeli"
+      ],
+      "knowsAbout": ["Computational Multiphysics", "Multiphase Flow", "Two-Fluid Model", "Discontinuous Galerkin FEM", "Computational Fluid Dynamics"]
+    }
+    </script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- About me section -->
-            <div class="col-md-3 p-4 bg-light text-center">
-                <!-- To add a figure -->
-                <img src="./assets/photo.jpeg" alt="Arshia Fazeli"
-                    class="img-fluid rounded-circle mb-3" style="width: 140px; height: 160px;">
+
+            <!-- ── Sidebar ── -->
+            <div class="col-md-3 sidebar text-center">
+                <img src="./assets/photo1.jpeg" alt="Arshia Fazeli"
+                    class="profile-photo img-fluid rounded-circle mb-3">
                 <h1>Arshia Fazeli</h1>
-                <p> Chemical Engineering PhD Candidate @ UWaterloo</p>
-                <!-- To add a resume -->
-                <div class="button-container">
+                <p class="subtitle">Chemical Engineering PhD Candidate<br>@ University of Waterloo</p>
+
+                <div class="button-container mb-3">
                     <a href="assets/resume.pdf" target="_blank"
-                       class="btn btn-outline-dark btn-rounded">Resume</a>
+                       class="btn btn-outline-dark btn-rounded">📄 Resume</a>
                 </div>
 
+                <hr>
+                <p class="expertise-text">
+                    <strong>Expertise</strong><br>
+                    Computational Multiphysics · Multiphase Flows · Numerical Methods
+                </p>
+                <hr>
 
-                <hr>
-                <p><strong>Expertise:</strong> Computational Multiphysics, Multiphase Flows, Numerical Methods </p>
-                <hr>
-                <p><strong>Lets Connect!</strong>
-                <p><a href="https://www.linkedin.com/in/arshia-fazeli" target="_blank">🔗 LinkedIn</a></p>
-                <p><a href="https://github.com/arfazeli" target="_blank">💻 GitHub</a></p>
-                <p><a href="mailto:arsh.fazeli@yahoo.com">📧 Email</a></p>
+                <p class="connect-label"><strong>Let's Connect</strong></p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/arshia-fazeli" target="_blank" class="social-link">
+                        🔗 <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/arfazeli" target="_blank" class="social-link">
+                        💻 <span>GitHub</span>
+                    </a>
+                    <a href="mailto:arsh.fazeli@yahoo.com" class="social-link">
+                        📧 <span>Email</span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Right Side - Tabs and Content -->
-            <div class="col-md-9 p-4">
+            <!-- ── Main Content ── -->
+            <div class="col-md-9 main-content p-4">
+
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education"
-                            type="button" role="tab" aria-controls="education" aria-selected="false">Education</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="experience-tab" data-bs-toggle="tab"
-                            data-bs-target="#experience" type="button" role="tab" aria-controls="experience"
-                            aria-selected="true">Experience</button>
+                        <button class="nav-link active" id="about-tab" data-bs-toggle="tab"
+                            data-bs-target="#about" type="button" role="tab"
+                            aria-controls="about" aria-selected="true">About</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects"
-                            type="button" role="tab" aria-controls="projects" aria-selected="false">Projects </button>
+                        <button class="nav-link" id="education-tab" data-bs-toggle="tab"
+                            data-bs-target="#education" type="button" role="tab"
+                            aria-controls="education" aria-selected="false">Education</button>
                     </li>
-
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="experience-tab" data-bs-toggle="tab"
+                            data-bs-target="#experience" type="button" role="tab"
+                            aria-controls="experience" aria-selected="false">Experience</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="publications-tab" data-bs-toggle="tab"
+                            data-bs-target="#publications" type="button" role="tab"
+                            aria-controls="publications" aria-selected="false">Publications</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab"
+                            data-bs-target="#projects" type="button" role="tab"
+                            aria-controls="projects" aria-selected="false">Projects</button>
+                    </li>
                 </ul>
 
+                <div class="tab-content mt-4" id="myTabContent">
 
-            <div class="tab-content mt-4" id="myTabContent">
-                <!-- TIL Tab -->
-                <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
-
-                    <!-- Education 1: UW-->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">PhD in Chemical Engineering</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
-                                    <p class="card-text"><small class="text-muted">Sept 2021 - Sept 2026
-                                            (Expected)</small></p>
-                                    <p class="card-text">
-                                        <strong>Grade:</strong>   92.67 <br>
-                                        <strong>Key Courses:</strong> Advanced Engineering Mathematics, Computational Fluid Dynamics,
-                                        Multiphase Flow Dynamics, Consulting
-                                    </p>
-                                </div>
+                    <!-- ── About Tab ── -->
+                    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                        <div class="card about-intro-card">
+                            <div class="card-body">
+                                <p class="about-greeting">👋 Hi, I'm Arshia</p>
+                                <p class="about-intro">
+                                    I'm a PhD candidate in Chemical Engineering at the University of Waterloo,
+                                    specialising in <strong>computational multiphysics</strong>, <strong>numerical methods</strong>,
+                                    and <strong>multiphase flow modelling</strong>.
+                                    My research focuses on developing a well-posed Euler–Euler multiphase model
+                                    with high physical fidelity for simulating dispersed flows — combining rigorous
+                                    mathematical formulation with high-order finite element solvers.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Education 2: UCL -->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">BEng in Chemical Engineering</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">University College London, UK</h6>
-                                    <p class="card-text"><small class="text-muted">Sep 2018 - June 2021</small></p>
-                                    <p class="card-text">
-                                        <strong>Grade:</strong>   First-Class Honours  <br>
-                                        <strong>Key Courses:</strong> Computational Modelling and Analysis, Reaction Engineering, Process Dynamics and Control,
-                                        Particulate Systems and Separation Processes <br>
-                                        <strong> Minors:</strong> Programming, Manufacture of Regenerative Medicine Products
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- ── Education Tab ── -->
+                    <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
 
-
-                    <div class="tab-pane fade show active" id="experience" role="tabpanel"
-                        aria-labelledby="experience-tab">
-                        <!-- Experience 1: PhD researcher-->
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Computational Multiphysics Researcher</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
-                                <p class="card-text"><small class="text-muted">Sept 2021 - TODAY</small></p>
-                                <ul>
-                                    <li>Developed a well-posed formulation of the two fluid model with enhanced physical fidelity for simulation of different types of dispersed multiphase flows. </li>
-                                    <li>Developed discontinuous Galerkin (DG) method solvers for various multiphysics problems, including two-fluid models, incompressible Navier–Stokes equations, and Cahn–Hilliard equation.</li>
-                                    <li>Performed numerical verification of the developed solvers via the Method of Manufactured Solutions (MMS), assessing convergence rates and discretization error to confirm implementation accuracy. </li>
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="card-title">PhD in Chemical Engineering</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
+                                    </div>
+                                    <span class="date-badge">Sept 2021 – Sept 2026 (Expected)</span>
+                                </div>
+                                <p class="card-text mt-2">
+                                    <strong>Grade:</strong> 92.67 &nbsp;|&nbsp;
+                                    <strong>Key Courses:</strong> Advanced Engineering Mathematics, Computational Fluid Dynamics,
+                                    Multiphase Flow Dynamics, Consulting
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="card-title">BEng in Chemical Engineering</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">University College London, UK</h6>
+                                    </div>
+                                    <span class="date-badge">Sep 2018 – June 2021</span>
+                                </div>
+                                <p class="card-text mt-2">
+                                    <strong>Grade:</strong> First-Class Honours &nbsp;|&nbsp;
+                                    <strong>Minors:</strong> Programming, Manufacture of Regenerative Medicine Products<br>
+                                    <strong>Key Courses:</strong> Computational Modelling and Analysis, Reaction Engineering,
+                                    Process Dynamics and Control, Particulate Systems and Separation Processes
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Experience Tab ── -->
+                    <div class="tab-pane fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="card-title">Computational Multiphysics Researcher</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
+                                    </div>
+                                    <span class="date-badge">Sept 2021 – Present</span>
+                                </div>
+                                <ul class="mt-2">
+                                    <li>Developed a well-posed formulation of the two-fluid model with enhanced physical fidelity for simulation of different types of dispersed multiphase flows.</li>
+                                    <li>Developed discontinuous Galerkin (DG) method solvers for various multiphysics problems, including two-fluid models, incompressible Navier–Stokes equations, and the Cahn–Hilliard equation.</li>
+                                    <li>Performed numerical verification of the developed solvers via the Method of Manufactured Solutions (MMS), assessing convergence rates and discretization error to confirm implementation accuracy.</li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- Experience 2: Teacher Assistant-->
+
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Teacher Assistant</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
-                                <p class="card-text"><small class="text-muted">Sept 2021 - TODAY</small></p>
-                                <ul>
-                                    <li> Teaching Assistant for courses related to transport phenomena, numerical methods for solving ODEs and PDEs, and computational methods. </li>
-                                    <li> Courses taught include: Computer Literacy & Programming (NE111/CHE120), Introduction to Computational Methods (NE113) , Continuum Mechanics for Nanotechnology Engineering (NE 318) ,Theory and Application of Transport Phenomena (CHE601). </li>
-                                    <li> Developed Python-based automated grading scripts for CHE 120 laboratory exercises, incorporating unit  testing, exception handling, and custom feedback generation to streamline and standardize student code assessment.</li>
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="card-title">Teaching Assistant</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
+                                    </div>
+                                    <span class="date-badge">Sept 2021 – Present</span>
+                                </div>
+                                <ul class="mt-2">
+                                    <li>Teaching Assistant for courses related to transport phenomena, numerical methods for solving ODEs and PDEs, and computational methods.</li>
+                                    <li>Courses: Computer Literacy &amp; Programming (NE111/CHE120), Introduction to Computational Methods (NE113), Continuum Mechanics for Nanotechnology Engineering (NE 318), Theory and Application of Transport Phenomena (CHE601).</li>
+                                    <li>Developed Python-based automated grading scripts for CHE 120 laboratory exercises, incorporating unit testing, exception handling, and custom feedback generation to streamline student code assessment.</li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
 
+                    <!-- ── Publications Tab ── -->
+                    <div class="tab-pane fade" id="publications" role="tabpanel" aria-labelledby="publications-tab">
 
-
-
-                <!-- Projects Tab -->
-                <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
-                        <!-- SIMPLE FVM project -->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank">
-                                    <img src="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE/blob/main/sol/combined_figure.png?raw=true"
-                                        class="img-fluid rounded-start" alt="INS-SIMPLE"
-                                        style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;" >
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE algorithm</h5>
-                                    <p class="card-text"> Finite-volume method solvers for the 2D incompressible Navier–Stokes equations, implemented using SIMPLE algorithms for velocity–pressure coupling.
-                                        The solver is extended to include scalar transport and reaction source terms and leverages Numba JIT compilation for high-performance execution.</p>
-                                    <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank"
-                                        class="btn btn-outline-dark btn-p">View Project</a>
+                        <div class="card mb-3 pub-card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                                    <span class="badge-journal">International Journal of Multiphase Flow</span>
+                                    <span class="badge-published">Published 2025</span>
                                 </div>
+                                <h5 class="pub-title">Laminar dispersion force effects on two-fluid modelling and simulation of bubble column hydrodynamics</h5>
+                                <p class="pub-authors"><strong>Arshia Fazeli</strong>, Sander Rhebergen, Nasser Mohieddin Abukhdeir</p>
+                                <p class="card-text">
+                                    A simulation-based study investigating the effects of recently proposed laminar dispersion force
+                                    models on the numerical stability and physical fidelity of the Two-Fluid Model (TFM) for
+                                    gas-dispersed multiphase flows. Demonstrates that including the laminar dispersion force
+                                    simultaneously improves hyperbolicity and predictive accuracy, validated against the Pfleger et al.
+                                    (1999) bubble column experiment using a custom Discontinuous Galerkin FEM solver built with NGSolve.
+                                </p>
+                                <a href="https://doi.org/10.1016/j.ijmultiphaseflow.2025.105590" target="_blank"
+                                   class="btn btn-outline-dark btn-rounded btn-sm mt-2">📄 View Paper</a>
                             </div>
                         </div>
+
                     </div>
-                        <!-- TFM DG solver project -->
+
+                    <!-- ── Projects Tab ── -->
+                    <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
+
+                        <!-- SIMPLE FVM -->
                         <div class="card mb-3">
                             <div class="row g-0">
-                                <div class="col-md-4">
-                                    <a href="#" onclick="return false;">
-                                        <img src="assets/bc_anim.gif?raw=true"
-                                            class="img-fluid rounded-start"
-                                            alt="DG Two-Fluid Solver Animation"
-                                            style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                <div class="col-md-4 project-img-wrap">
+                                    <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank">
+                                        <img src="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE/blob/main/sol/combined_figure.png?raw=true"
+                                            class="project-img" alt="INS-SIMPLE">
                                     </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE Algorithm</h5>
+                                        <p class="card-text">Finite-volume method solvers for the 2D incompressible Navier–Stokes equations using SIMPLE for velocity–pressure coupling, extended to include scalar transport and reaction source terms with Numba JIT compilation.</p>
+                                        <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank"
+                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TFM DG solver -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <img src="assets/bc_anim.gif" class="project-img" alt="DG Two-Fluid Solver Animation">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">Discontinuous Galerkin Solver for Euler–Euler Two-Fluid Model</h5>
-                                        <p class="card-text">
-                                            DG-based finite element solver for simulating dispersed multiphase flows using the two-fluid models.
-                                        </p>
+                                        <p class="card-text">DG-based finite element solver for simulating dispersed multiphase flows using the two-fluid model, implemented in NGSolve with adaptive implicit time-stepping and mixed HDiv/L2 function spaces.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <!-- CH DG solver project -->
-                    <div class="card mb-3">
+
+                        <!-- CH DG solver -->
+                        <div class="card mb-3">
                             <div class="row g-0">
-                                <div class="col-md-4">
-                                    <a href="#" onclick="return false;">
-                                        <img src="assets/ch_anim.gif?raw=true"
-                                             class="img-fluid rounded-start"
-                                             alt="CH Animation"
-                                             style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
+                                <div class="col-md-4 project-img-wrap">
+                                    <img src="assets/ch_anim.gif" class="project-img" alt="Cahn–Hilliard Animation">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard Equation</h5>
+                                        <p class="card-text">DG-based finite element solver for the Cahn–Hilliard phase-field equation, capturing spinodal decomposition dynamics of binary fluid systems.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 1D Euler FVS -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <a href="https://github.com/arshia-fazeli/1D_Euler_FVS" target="_blank">
+                                        <img src="https://github.com/arshia-fazeli/1D_Euler_FVS/blob/main/outputs/transient.gif?raw=true"
+                                            class="project-img" alt="1D Euler Solver Animation">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard equation</h5>
-                                        <p class="card-text">
-                                            DG-based finite element solver for solving Cahn–Hilliard equation.
-                                        </p>
+                                        <h5 class="card-title">1D Euler Equations Solver using Flux Vector Splitting</h5>
+                                        <p class="card-text">Finite-volume method solver for the 1D compressible Euler equations using Steger-Warming and Van Leer flux vector splitting schemes. Includes symbolic derivations and shock tube visualizations.</p>
+                                        <a href="https://github.com/arshia-fazeli/1D_Euler_FVS" target="_blank"
+                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
 
-                    <!-- 1D Euler FVS project -->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <a href="https://github.com/arshia-fazeli/1D_Euler_FVS" target="_blank">
-                                    <img src="https://github.com/arshia-fazeli/1D_Euler_FVS/blob/main/outputs/transient.gif?raw=true"
-                                        class="img-fluid rounded-start" alt="1D Euler Solver Animation"
-                                        style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;" >
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">1D Euler Equations Solver using Flux Vector Splitting</h5>
-                                    <p class="card-text">
-                                        Finite-volume method (FVM) solver for the one-dimensional compressible Euler equations using Steger-Warming and Van Leer flux vector splitting schemes. Includes symbolic derivations and visualization of shock tube results.
-                                    </p>
-                                    <a href="https://github.com/arshia-fazeli/1D_Euler_FVS" target="_blank"
-                                        class="btn btn-outline-dark btn-p">View Project</a>
+                        <!-- INS SCGS FVM -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS" target="_blank">
+                                        <img src="https://github.com/arshia-fazeli/IncompressibleNS_SCGS/blob/main/sample_profiles.png?raw=true"
+                                            class="project-img" alt="INS SCGS profiles">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Incompressible Navier-Stokes Solver using SCGS Algorithm</h5>
+                                        <p class="card-text">Finite-volume method solver for the 2D incompressible Navier-Stokes equations implemented using the Symmetric Coupled Gauss–Seidel (SCGS) method.</p>
+                                        <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS.git" target="_blank"
+                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- INS SCGS FVM project -->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS" target="_blank">
-                                    <img src="https://github.com/arshia-fazeli/IncompressibleNS_SCGS/blob/main/sample_profiles.png?raw=true"
-                                        class="img-fluid w-100 rounded-start" alt="Dyslexic Reader"
-                                    style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;" >
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Incompressible Navier-Stokes Solver using SCGS algorithm</h5>
-                                    <p class="card-text">Finite-volume method (FVM) solver for the 2D incompressible Navier-Stokes equations
-                                        implemented using the Symmetric Coupled Gauss–Seidel (SCGS) method. </p>
-                                    <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS.git" target="_blank"
-                                        class="btn btn-outline-dark btn-p">View Project</a>
+                        <!-- Combustor -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <img src="assets/me556_project.png" class="project-img" alt="Side-Dump Combustor CFD">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">CFD Simulation of a Side-Dump Combustor with Variable Inlet Angles</h5>
+                                        <p class="card-text">CFD simulations of turbulent airflow in a side-dump combustor using ANSYS CFX, validated against experimental velocity and turbulence data. Investigated the impact of side-inlet angle on fuel-air mixing with mesh refinement and error analysis.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Combustor project -->
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <a href="https://github.com/arshia-fazeli/IncompressibleNS_SCGS" target="_blank">
-                                    <img src="assets/me556_project.png?raw=true"
-                                        class="img-fluid w-100 rounded-start" alt="Dyslexic Reader"
-                                    style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;" >
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">CFD Simulation of a Side-Dump Combustor with Variable Inlet Angles</h5>
-                                    <p class="card-text">Performed CFD simulations of a turbulent airflow in a side-dump combustor using ANSYS CFX and validated results against experimental velocity and turbulence data.
-                                        Investigated the impact of side-inlet angle on fuel-air mixing and conducted mesh refinement and error analysis to quantify discretization and modeling errors. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
         </div>
     </div>
-    </div>
-    </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
