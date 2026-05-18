@@ -235,21 +235,16 @@
                     <!-- ── Projects Tab ── -->
                     <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
 
-                        <!-- SIMPLE FVM -->
+                        <!-- CHNS DG solver -->
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank">
-                                        <img src="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE/blob/main/sol/combined_figure.png?raw=true"
-                                            class="project-img" alt="INS-SIMPLE">
-                                    </a>
+                                    <img src="assets/CHNS_H_deformed_interface.gif" class="project-img" alt="CHNS Solver Animation">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE Algorithm</h5>
-                                        <p class="card-text">Finite-volume method solvers for the 2D incompressible Navier–Stokes equations using SIMPLE for velocity–pressure coupling, extended to include scalar transport and reaction source terms with Numba JIT compilation.</p>
-                                        <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank"
-                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard Navier–Stokes System</h5>
+                                        <p class="card-text">DG finite element solver for the coupled Cahn–Hilliard Navier–Stokes (CHNS) system, simulating the evolution of two immiscible, incompressible fluids separated by a diffuse interface, implemented in Python using NGSolve.</p>
                                     </div>
                                 </div>
                             </div>
@@ -274,12 +269,17 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
-                                    <img src="assets/ch_anim.gif" class="project-img" alt="Cahn–Hilliard Animation">
+                                    <a href="https://github.com/arshia-fazeli/CH_DG_solver" target="_blank">
+                                        <img src="https://github.com/arshia-fazeli/CH_DG_solver/blob/main/anim.gif?raw=true"
+                                                class="project-img" alt="CH solver sample output">
+                                    </a>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard Equation</h5>
-                                        <p class="card-text">DG-based finite element solver for the Cahn–Hilliard phase-field equation, capturing spinodal decomposition dynamics of binary fluid systems.</p>
+                                        <p class="card-text">DG-based finite element solver for the Cahn–Hilliard phase-field equation, capturing spinodal decomposition dynamics of binary fluid systems, with adaptive mesh refinement driven by a Zienkiewicz–Zhu gradient-recovery error estimator on ∇c.</p>
+                                        <a href="https://github.com/arshia-fazeli/CH_DG_solver" target="_blank"
+                                        class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
                                     </div>
                                 </div>
                             </div>
@@ -299,6 +299,26 @@
                                         <h5 class="card-title">1D Euler Equations Solver using Flux Vector Splitting</h5>
                                         <p class="card-text">Finite-volume method solver for the 1D compressible Euler equations using Steger-Warming and Van Leer flux vector splitting schemes. Includes symbolic derivations and shock tube visualizations.</p>
                                         <a href="https://github.com/arshia-fazeli/1D_Euler_FVS" target="_blank"
+                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SIMPLE FVM -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank">
+                                        <img src="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE/blob/main/sol/combined_figure.png?raw=true"
+                                            class="project-img" alt="INS-SIMPLE">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE Algorithm</h5>
+                                        <p class="card-text">Finite-volume method solvers for the 2D incompressible Navier–Stokes equations using SIMPLE for velocity–pressure coupling, extended to include scalar transport and reaction source terms with Numba JIT compilation.</p>
+                                        <a href="https://github.com/arshia-fazeli/IncompressibleMCNS_SIMPLE" target="_blank"
                                             class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
                                     </div>
                                 </div>
