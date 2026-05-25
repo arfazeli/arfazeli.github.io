@@ -278,6 +278,27 @@ ul li {
     border: 1px solid #6ee7b7;
 }
 
+.badge-under-review {
+    display: inline-block;
+    background-color: #fff7ed;
+    color: #d97706;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid #fcd34d;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #888;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 6px;
+}
+
 .pub-title {
     font-size: 1.1rem;
     font-weight: 700;
