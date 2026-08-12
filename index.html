@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arshia Fazeli | Computational Multiphysics Researcher</title>
-    <meta name="description" content="Arshia Fazeli — PhD candidate in Chemical Engineering at the University of Waterloo, specialising in computational multiphysics, two-fluid models, and discontinuous Galerkin FEM solvers for multiphase flows.">
-    <meta name="keywords" content="Arshia Fazeli, computational multiphysics, two-fluid model, multiphase flow, discontinuous Galerkin, CFD, University of Waterloo, Chemical Engineering, PhD">
+    <title>Arshia Fazeli | Computational Scientist &amp; Scientific Software Developer</title>
+    <meta name="description" content="Arshia Fazeli — computational scientist and scientific software developer building high-order numerical methods, multiphysics models, and verified simulation software.">
+    <meta name="keywords" content="Arshia Fazeli, CFD, computational multiphysics, Euler-Euler, two-fluid model, multiphase flow, discontinuous Galerkin, OpenFOAM, Ansys CFX, NGSolve">
     <meta name="author" content="Arshia Fazeli">
     <link rel="canonical" href="https://arfazeli.github.io/">
 
     <!-- Open Graph (for LinkedIn / social sharing) -->
-    <meta property="og:title" content="Arshia Fazeli | Computational Multiphysics Researcher">
-    <meta property="og:description" content="PhD candidate at the University of Waterloo working on well-posed two-fluid models and high-order DG-FEM solvers for dispersed multiphase flows.">
+    <meta property="og:title" content="Arshia Fazeli | Computational Scientist &amp; Scientific Software Developer">
+    <meta property="og:description" content="Computational scientist developing high-order numerical methods, multiphysics models, and open-source scientific software.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://arfazeli.github.io/">
 
@@ -33,12 +33,12 @@
         "https://github.com/arfazeli",
         "https://orcid.org/0009-0005-5384-9336"
       ],
-      "knowsAbout": ["Computational Multiphysics", "Multiphase Flow", "Two-Fluid Model", "Discontinuous Galerkin FEM", "Computational Fluid Dynamics"]
+      "knowsAbout": ["Computational Fluid Dynamics", "Computational Multiphysics", "Euler-Euler Two-Fluid Models", "Discontinuous Galerkin FEM", "OpenFOAM", "RANS Turbulence", "Population Balance Modelling"]
     }
     </script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -48,10 +48,10 @@
 
             <!-- ── Sidebar ── -->
             <div class="col-md-3 sidebar text-center">
-                <img src="./assets/photo.jpeg" alt="Arshia Fazeli"
+                <img src="./assets/photo.jpeg" alt="Arshia Fazeli" fetchpriority="high" decoding="async"
                     class="profile-photo img-fluid rounded-circle mb-3">
                 <h1>Arshia Fazeli</h1>
-                <p class="subtitle">Chemical Engineering PhD Candidate<br>@ University of Waterloo</p>
+                <p class="subtitle">Computational Scientist &amp;<br>Scientific Software Developer</p>
 
                 <div class="button-container mb-3">
                     <a href="assets/resume.pdf" target="_blank"
@@ -61,7 +61,7 @@
                 <hr>
                 <p class="expertise-text">
                     <strong>Expertise</strong><br>
-                    Computational Multiphysics · Multiphase Flows · Numerical Methods
+                    Multiphase CFD · High-Order FEM · Scientific Software
                 </p>
                 <hr>
 
@@ -73,7 +73,7 @@
                     <a href="https://github.com/arfazeli" target="_blank" class="social-link">
                         💻 <span>GitHub</span>
                     </a>
-                    <a href="mailto:arsh.fazeli@yahoo.com" class="social-link">
+                    <a href="mailto:fazeliarshia@gmail.com" class="social-link">
                         📧 <span>Email</span>
                     </a>
                     <a href="https://orcid.org/0009-0005-5384-9336" target="_blank" class="social-link">
@@ -116,25 +116,37 @@
                             <div class="card-body">
                                 <p class="about-greeting">👋 Hi, I'm Arshia</p>
                                 <p class="about-intro">
-                                    I'm a PhD candidate in Chemical Engineering at the University of Waterloo,
-                                    specialising in <strong>computational multiphysics</strong>, <strong>numerical methods</strong>,
-                                    and <strong>multiphase flow modelling</strong>.
-                                    My research focuses on developing a well-posed Euler–Euler multiphase model
-                                    with high physical fidelity for simulating dispersed flows — combining rigorous
-                                    mathematical formulation with high-order finite element solvers.
+                                    I'm a computational scientist and Chemical Engineering PhD candidate at the University of Waterloo.
+                                    I build <strong>scientific software</strong>, <strong>high-order numerical methods</strong>,
+                                    and physically rigorous multiphysics models. My work spans solver architecture,
+                                    bound-preserving algorithms, adaptive methods, automated testing, HPC simulation,
+                                    verification, experimental validation, and applied CFD.
                                 </p>
                             </div>
                         </div>
 
-                        <h6 class="section-label mt-4 mb-3">Sample Projects</h6>
+                        <h6 class="section-label mt-4 mb-3">Selected Projects</h6>
+
+                        <!-- OpenCMP -->
+                        <div class="card mb-3 featured-project">
+                                    <div class="card-body text-project-body">
+                                        <h5 class="card-title">Euler–Euler and Turbulence Capabilities for OpenCMP</h5>
+                                        <p class="card-text">Developed an <em>H</em>(div)-conforming DG two-fluid solver, a high-Reynolds-number <em>k</em>–ε RANS model with wall functions, and bound-preserving high-order DG limiters. Contributions include engineering-correlation inlet defaults, tutorials, and automated tests.</p>
+                                        <div class="project-tags"><span>Python</span><span>NGSolve</span><span>DG-FEM</span><span>Open source</span></div>
+                                        <a href="https://github.com/uw-comphys/opencmp" target="_blank"
+                                           class="btn btn-outline-dark btn-rounded btn-sm mt-3">View OpenCMP</a>
+                                    </div>
+                        </div>
 
                         <!-- CHNS DG solver -->
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/CHNS_DG_solver" target="_blank">
-                                        <img src="https://github.com/arfazeli/CHNS_DG_solver/blob/main/anim/CHNS_H_deformed_interface.gif?raw=true"
-                                                class="project-img" alt="CHNS solver sample output">
+                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
+                                               poster="assets/chns-poster.jpg" aria-label="CHNS solver sample output">
+                                            <source data-src="assets/chns.mp4" type="video/mp4">
+                                        </video>
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -152,12 +164,15 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
-                                    <img src="assets/bc_anim.gif" class="project-img" alt="DG Two-Fluid Solver Animation">
+                                    <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
+                                           poster="assets/tfm-poster.jpg" aria-label="DG two-fluid solver animation">
+                                        <source data-src="assets/tfm.mp4" type="video/mp4">
+                                    </video>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">Discontinuous Galerkin Solver for Euler–Euler Two-Fluid Model</h5>
-                                        <p class="card-text">DG-based finite element solver for simulating dispersed multiphase flows using the two-fluid model, implemented in NGSolve with adaptive implicit time-stepping and mixed HDiv/L2 function spaces.</p>
+                                        <p class="card-text">High-order finite-element DG implementation of a mathematically well-posed canonical two-fluid model with enhanced physical fidelity. Couples phase momentum and volume-fraction transport using mixed <em>H</em>(div)/L<sup>2</sup> spaces, bound-preserving schemes, and adaptive implicit time stepping.</p>
                                     </div>
                                 </div>
                             </div>
@@ -168,8 +183,10 @@
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/CH_DG_solver" target="_blank">
-                                        <img src="https://github.com/arfazeli/CH_DG_solver/blob/main/anim.gif?raw=true"
-                                                class="project-img" alt="CH solver sample output">
+                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
+                                               poster="assets/ch-poster.jpg" aria-label="Cahn–Hilliard solver sample output">
+                                            <source data-src="assets/ch.mp4" type="video/mp4">
+                                        </video>
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -188,8 +205,8 @@
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/DG_limiters" target="_blank">
-                                        <img src="https://github.com/arfazeli/DG_limiters/raw/main/anim/bjlimiter.gif"
-                                             class="project-img" alt="Kuzmin slope limiter animation">
+                                        <img src="assets/dg-limiter.gif" class="project-img" loading="lazy" decoding="async"
+                                             alt="Kuzmin slope limiter animation">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -203,13 +220,50 @@
                             </div>
                         </div>
 
+                        <!-- Ebullated-bed reactor -->
+                        <div class="card mb-3 applied-project">
+                                    <div class="card-body text-project-body">
+                                        <h5 class="card-title">Recycle-Cup Gas–Liquid Separation for Bitumen Hydroprocessing</h5>
+                                        <p class="card-text">Recreated a three-dimensional pilot-scale ebullated-bed reactor to assess gas entrainment in an internal recycle line. Implemented feedback-controlled recycle-outlet conditions and a population balance to study bubble-size effects on gas hold-up, interphase momentum exchange, and hydrodynamics.</p>
+                                        <div class="project-tags"><span>OpenFOAM</span><span>Multiphase CFD</span><span>Feedback control</span><span>Population balance</span></div>
+                                    </div>
+                        </div>
+
+                        <!-- Aerated bioreactor -->
+                        <div class="card mb-3 applied-project">
+                                    <div class="card-body text-project-body">
+                                        <h5 class="card-title">Industrial-Scale Aerated Bioreactor</h5>
+                                        <p class="card-text">Modelled a 2.08 m diameter, 7.55 m tall vessel with four six-blade impellers using Euler–Euler/PIMPLE, <em>k</em>–ε and bubble-induced turbulence, and multiple reference frames at 120 rpm. Evaluated liquid circulation and gas-volume-fraction distributions throughout the vessel.</p>
+                                        <div class="project-tags"><span>OpenFOAM</span><span>Euler–Euler</span><span>RANS</span><span>Rotating machinery</span></div>
+                                    </div>
+                        </div>
+
+                        <!-- Combustor -->
+                        <div class="card mb-3 applied-project">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <img src="assets/me556_project.png" class="project-img" loading="lazy" decoding="async"
+                                         alt="Side-Dump Combustor CFD">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Side-Dump Combustor with Variable Inlet Angles</h5>
+                                        <p class="card-text">Simulated turbulent airflow and mixing using Ansys CFX, validated velocity and turbulence predictions against experiments, and performed systematic mesh refinement to distinguish discretization and modelling errors.</p>
+                                        <div class="project-tags"><span>Ansys CFX</span><span>Turbulence</span><span>Validation</span><span>Mesh study</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- 1D Euler FVS -->
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/1D_Euler_FVS" target="_blank">
-                                        <img src="https://github.com/arfazeli/1D_Euler_FVS/blob/main/outputs/transient_new.gif?raw=true"
-                                            class="project-img" alt="1D Euler Solver Animation">
+                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
+                                               poster="assets/euler-poster.jpg" aria-label="1D Euler solver animation">
+                                            <source data-src="assets/euler.mp4" type="video/mp4">
+                                        </video>
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -228,8 +282,8 @@
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE" target="_blank">
-                                        <img src="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE/blob/main/sol/combined_figure.png?raw=true"
-                                            class="project-img" alt="INS-SIMPLE">
+                                        <img src="assets/simple-solver.png" class="project-img" loading="lazy" decoding="async"
+                                             alt="INS-SIMPLE solver output">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -248,8 +302,8 @@
                             <div class="row g-0">
                                 <div class="col-md-4 project-img-wrap">
                                     <a href="https://github.com/arfazeli/IncompressibleNS_SCGS" target="_blank">
-                                        <img src="https://github.com/arfazeli/IncompressibleNS_SCGS/blob/main/sample_profiles.png?raw=true"
-                                            class="project-img" alt="INS SCGS profiles">
+                                        <img src="assets/scgs-solver.png" class="project-img" loading="lazy" decoding="async"
+                                             alt="INS SCGS profiles">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
@@ -258,21 +312,6 @@
                                         <p class="card-text">Finite-volume method solver for the 2D incompressible Navier-Stokes equations implemented using the Symmetric Coupled Gauss–Seidel (SCGS) method.</p>
                                         <a href="https://github.com/arfazeli/IncompressibleNS_SCGS.git" target="_blank"
                                             class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Combustor -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <img src="assets/me556_project.png" class="project-img" alt="Side-Dump Combustor CFD">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">CFD Simulation of a Side-Dump Combustor with Variable Inlet Angles</h5>
-                                        <p class="card-text">CFD simulations of turbulent airflow in a side-dump combustor using ANSYS CFX, validated against experimental velocity and turbulence data. Investigated the impact of side-inlet angle on fuel-air mixing with mesh refinement and error analysis.</p>
                                     </div>
                                 </div>
                             </div>
@@ -323,6 +362,25 @@
                     <!-- ── Experience Tab ── -->
                     <div class="tab-pane fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
 
+                        <div class="card mb-3 experience-featured">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                                    <div>
+                                        <h5 class="card-title">Developer — OpenCMP</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Open-Source CFD and Multiphysics Framework</h6>
+                                    </div>
+                                    <span class="date-badge">Apr 2026 – Present</span>
+                                </div>
+                                <ul class="mt-2">
+                                    <li>Developed an <em>H</em>(div)-conforming DG Euler–Euler solver with coupled phase velocities, pressure, volume fraction, and selectable interphase-force closures.</li>
+                                    <li>Implemented high-Reynolds-number <em>k</em>–ε RANS with wall functions, automatic wall distance, physical limiters, and correlation-based inlet conditions.</li>
+                                    <li>Added bound-preserving high-order DG limiters, documented tutorials, automated tests, restart support, and CI improvements.</li>
+                                </ul>
+                                <a href="https://github.com/uw-comphys/opencmp" target="_blank"
+                                   class="btn btn-outline-dark btn-rounded btn-sm mt-2">View OpenCMP</a>
+                            </div>
+                        </div>
+
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
@@ -333,9 +391,9 @@
                                     <span class="date-badge">Sept 2021 – Present</span>
                                 </div>
                                 <ul class="mt-2">
-                                    <li>Developed a well-posed formulation of the two-fluid model with enhanced physical fidelity for simulation of different types of dispersed multiphase flows.</li>
-                                    <li>Developed discontinuous Galerkin (DG) method solvers for various multiphysics problems, including two-fluid models, incompressible Navier–Stokes equations, and the Cahn–Hilliard equation.</li>
-                                    <li>Performed numerical verification of the developed solvers via the Method of Manufactured Solutions (MMS), assessing convergence rates and discretization error to confirm implementation accuracy.</li>
+                                    <li>Developed a mathematically well-posed canonical two-fluid model with enhanced physical fidelity, eliminating the mesh-dependent instability of conventional formulations.</li>
+                                    <li>Designed a high-order finite-element DG solver with bound-preserving schemes, coupled phase transport, interphase-force and turbulence closures, and adaptive implicit time stepping.</li>
+                                    <li>Verified accuracy with manufactured solutions and validated 3D gas–liquid and liquid–liquid predictions against three independent experimental datasets on national HPC clusters.</li>
                                 </ul>
                             </div>
                         </div>
@@ -347,12 +405,12 @@
                                         <h5 class="card-title">Teaching Assistant</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
                                     </div>
-                                    <span class="date-badge">Sept 2021 – Present</span>
+                                    <span class="date-badge">Sept 2021 – Dec 2025</span>
                                 </div>
                                 <ul class="mt-2">
                                     <li>Teaching Assistant for courses related to transport phenomena, numerical methods for solving ODEs and PDEs, and computational methods.</li>
                                     <li>Courses: Computer Literacy &amp; Programming (NE111/CHE120), Introduction to Computational Methods (NE113), Continuum Mechanics for Nanotechnology Engineering (NE 318), Theory and Application of Transport Phenomena (CHE601).</li>
-                                    <li>Developed Python-based automated grading scripts for CHE 120 laboratory exercises, incorporating unit testing, exception handling, and custom feedback generation to streamline student code assessment.</li>
+                                    <li>Built a randomized Python autograder for CHE120 with unit testing, safe execution, weighted scoring, and targeted student feedback.</li>
                                 </ul>
                             </div>
                         </div>
@@ -365,7 +423,7 @@
                         <div class="card mb-3 pub-card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
-                                    <span class="badge-journal">International Journal of Multiphase Flow</span>
+                                    <span class="badge-journal">Chemical Engineering Science</span>
                                     <span class="badge-under-review">Under Review</span>
                                 </div>
                                 <h5 class="pub-title">Canonical formulation of two-fluid model with enhanced physical fidelity</h5>
@@ -414,6 +472,32 @@
         </div>
     </div>
 
+    <script>
+        const lazyVideos = document.querySelectorAll('.lazy-video');
+
+        const loadVideo = (video) => {
+            const source = video.querySelector('source[data-src]');
+            if (!source) return;
+            source.src = source.dataset.src;
+            source.removeAttribute('data-src');
+            video.load();
+            video.play().catch(() => {});
+        };
+
+        if ('IntersectionObserver' in window) {
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    loadVideo(entry.target);
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: '300px 0px' });
+
+            lazyVideos.forEach((video) => videoObserver.observe(video));
+        } else {
+            lazyVideos.forEach(loadVideo);
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
