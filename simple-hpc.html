@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMPLE on CPU and GPU | Arshia Fazeli</title>
+    <meta name="description" content="A C++17 SIMPLE CFD solver tuned for multicore CPUs and AMD MI300A GPUs: OpenMP strong scaling, NUMA-aware memory placement, a HIP GPU port, and rocprofv3 profiling.">
+    <meta name="author" content="Arshia Fazeli">
+    <link rel="canonical" href="https://arfazeli.github.io/simple-hpc.html">
+    <meta property="og:title" content="SIMPLE on CPU and GPU | Arshia Fazeli">
+    <meta property="og:description" content="OpenMP, NUMA, HIP/ROCm and profiler-driven tuning of a C++17 CFD solver on Intel Xeon and AMD MI300A hardware.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://arfazeli.github.io/simple-hpc.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case { max-width: 940px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        .case h1 { font-size: 2rem; line-height: 1.2; }
+        .case h2 { font-size: 1.35rem; font-weight: 700; color: #1d1d1f; margin: 2.75rem 0 .6rem; }
+        .case .lead { font-size: 1.05rem; color: #444; }
+        .case p, .case li { line-height: 1.65; }
+        .back { font-size: .9rem; color: #555; text-decoration: none; }
+        .back:hover { color: #000; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 1.75rem 0 .5rem; }
+        .stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; }
+        .stat .num { font-size: 1.9rem; font-weight: 700; color: #1d1d1f; line-height: 1.1; font-variant-numeric: tabular-nums; }
+        .stat .lbl { font-size: .85rem; color: #555; margin-top: .3rem; }
+        figure { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; margin: 1rem 0 1.25rem; }
+        figure img { width: 100%; height: auto; display: block; }
+        figcaption { font-size: .85rem; color: #555; margin-top: .6rem; }
+        .callout { border-left: 3px solid #2a78d6; background: #fff; padding: .8rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 720px) { .two { grid-template-columns: 1fr; } .case h1 { font-size: 1.6rem; } }
+        code { color: #b4361b; }
+    </style>
+</head>
+
+<body>
+    <main class="case">
+        <a class="back" href="index.html">← All projects</a>
+
+        <h1 class="mt-3">An incompressible Navier&ndash;Stokes solver tuned for multicore CPUs and GPUs</h1>
+        <p class="lead">A C++17 finite-volume SIMPLE solver for the lid-driven cavity (staggered grid, QUICK
+            convection, multigrid pressure correction). I parallelised it with OpenMP, made its memory
+            placement NUMA-aware, and ported it to the GPU with HIP. Every step is measured on a dual-socket
+            Intel Xeon 6972P node and an AMD MI300A, against a memory-bandwidth baseline taken on the same hardware.</p>
+        <div class="project-tags">
+            <span>C++17</span><span>OpenMP</span><span>HIP / ROCm</span><span>AMD MI300A</span>
+            <span>rocprofv3</span><span>NUMA</span><span>Slurm</span><span>Catch2</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><div class="num">25×</div><div class="lbl">strong-scaling speedup on 32 cores (512² grid)</div></div>
+            <div class="stat"><div class="num">2.7×</div><div class="lbl">MI300A GPU vs 8 CPU cores, same converged answer</div></div>
+            <div class="stat"><div class="num">95%</div><div class="lbl">of measured GPU memory bandwidth reached by the hot kernels</div></div>
+            <div class="stat"><div class="num">1.26×</div><div class="lbl">from NUMA-aware memory placement alone (4096², 32 threads)</div></div>
+        </div>
+
+        <h2>Correct first</h2>
+        <p>Speed only counts if the answer is right. The solver reproduces the Ghia et&nbsp;al. (1982) benchmark
+            at Re&nbsp;400 and Re&nbsp;1000. The validation runs are part of the test suite (68 tests, run on the cluster),
+            and snapshot tests pin the numerics so that no optimisation can quietly change results.</p>
+        <figure>
+            <img src="assets/simple-hpc/re1000_128.png" loading="lazy" decoding="async"
+                 alt="Computed centreline velocities at Re 1000 on a 128 by 128 grid overlaid on the Ghia et al. reference points">
+            <figcaption>Centreline velocities at Re&nbsp;1000, 128² grid, against Ghia et&nbsp;al.</figcaption>
+        </figure>
+
+        <h2>Scaling on a 32-core slice of a CPU node</h2>
+        <p>The momentum and pressure sweeps use multicolour Gauss–Seidel, so cells of one colour update in parallel. The pressure equation uses a geometric multigrid
+            V-cycle. Small grids fit in the node's large L3 cache and scale super-linearly; large grids follow the
+            STREAM bandwidth curve. They are memory-bound, which is the expected ceiling for a stencil code.</p>
+        <figure>
+            <img src="assets/simple-hpc/cpu_scaling.png" loading="lazy" decoding="async"
+                 alt="Speedup versus OpenMP threads for four grid sizes, with ideal and STREAM bandwidth reference lines">
+            <figcaption>Fixed work, Intel Xeon 6972P, median of 3 runs. The dotted line is measured memory bandwidth
+                on the same cores.</figcaption>
+        </figure>
+
+        <h2>Putting memory where the threads are</h2>
+        <p>The node splits each socket into NUMA domains. Linux places a memory page in the domain of the thread
+            that first writes it, and the solver used to initialise every array from one thread. I switched to
+            allocating without zeroing and writing each array first in parallel, with the same row split as the
+            compute loops. Each thread then works on local memory.</p>
+        <figure>
+            <img src="assets/simple-hpc/numa.png" loading="lazy" decoding="async"
+                 alt="Left: speedup for serial first touch, interleaved memory and parallel first touch. Right: multigrid solve time before and after the fix">
+            <figcaption>The gain appears exactly when threads spill into a second NUMA domain (left), which confirms
+                the mechanism. Applying the same fix to the multigrid arrays makes the pressure solve up to 1.31× faster (right).</figcaption>
+        </figure>
+
+        <h2>Porting to the GPU</h2>
+        <p>The HIP backend runs the whole outer iteration on the MI300A, with all fields resident on the device
+            and one thread per cell. Reductions use a fixed-order block tree, so runs are deterministic, and tests check
+            each GPU phase against the CPU code.</p>
+        <figure>
+            <img src="assets/simple-hpc/gpu_vs_cpu.png" loading="lazy" decoding="async"
+                 alt="Time to solution: 5.83 seconds on 8 CPU cores versus 2.19 seconds on one MI300A GPU">
+            <figcaption>Re&nbsp;1000, 128² grid, solved to convergence in 5919 outer iterations on both devices.</figcaption>
+        </figure>
+
+        <h2>Profiling: where the GPU time goes</h2>
+        <p>The kernel traces and hardware counters from <code>rocprofv3</code> answer two questions: which kernels
+            cost the most, and how close each comes to the memory bandwidth measured on the device itself with a
+            STREAM-style HIP kernel.</p>
+        <figure>
+            <img src="assets/simple-hpc/gpu_kernels.png" loading="lazy" decoding="async"
+                 alt="Achieved bandwidth per GPU kernel, between 2.7 and 3.75 terabytes per second, against a 3.89 terabyte per second STREAM line">
+            <figcaption>2048² grid. The three sweep kernels take 87% of GPU time and run at 91–95% of device STREAM.</figcaption>
+        </figure>
+        <div class="callout">
+            <strong>What the profile says to do next.</strong> The hot kernels are already at the bandwidth ceiling, so
+            faster code will not help; the only lever is moving fewer bytes. Each colour pass of the sweep reads every
+            array in full while updating a fifth of the cells. Storing the coefficients grouped by colour cuts that
+            traffic. That change is in progress.
+        </div>
+
+        <h2>How it is built</h2>
+        <ul>
+            <li><strong>Reproducible measurements:</strong> Slurm scripts for every experiment, fixed thread placement,
+                medians of repeated runs, and a STREAM baseline measured on the same cores in the same job.</li>
+            <li><strong>Guarded numerics:</strong> Catch2 unit, snapshot and validation tests run on every build.</li>
+            <li><strong>Claims backed by data:</strong> every claim on this page comes from a benchmark CSV or a profiler output,
+                not from a single wall-clock run.</li>
+        </ul>
+
+        <!-- TODO: point this at the public repository once it is published -->
+        <a href="https://github.com/arfazeli/simple-hpc" target="_blank"
+           class="btn btn-outline-dark btn-rounded mt-3">View on GitHub</a>
+    </main>
+</body>
+
+</html>

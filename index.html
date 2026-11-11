@@ -127,15 +127,24 @@
 
                         <h6 class="section-label mt-4 mb-3">Selected Projects</h6>
 
-                        <!-- OpenCMP -->
-                        <div class="card mb-3 featured-project">
-                                    <div class="card-body text-project-body">
-                                        <h5 class="card-title">Euler–Euler and Turbulence Capabilities for OpenCMP</h5>
-                                        <p class="card-text">Developed an <em>H</em>(div)-conforming DG two-fluid solver, a high-Reynolds-number <em>k</em>–ε RANS model with wall functions, and bound-preserving high-order DG limiters. Contributions include engineering-correlation inlet defaults, tutorials, and automated tests.</p>
-                                        <div class="project-tags"><span>Python</span><span>NGSolve</span><span>DG-FEM</span><span>Open source</span></div>
-                                        <a href="https://github.com/uw-comphys/opencmp" target="_blank"
-                                           class="btn btn-outline-dark btn-rounded btn-sm mt-3">View OpenCMP</a>
+                        <!-- SIMPLE on CPU and GPU (HPC) -->
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4 project-img-wrap">
+                                    <a href="simple-hpc.html">
+                                        <img src="assets/simple-hpc/cpu_scaling.png" class="project-img" loading="lazy" decoding="async"
+                                             alt="Strong-scaling speedup of the SIMPLE solver on 32 CPU cores">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">An Incompressible Navier&ndash;Stokes Solver Tuned for Multicore CPUs and GPUs</h5>
+                                        <p class="card-text">C++17 SIMPLE solver with OpenMP (25× on 32 cores), NUMA-aware first-touch memory placement, and a HIP/ROCm GPU port 2.7× faster than 8 CPU cores. Profiled with rocprofv3: the hot kernels reach 95% of measured GPU memory bandwidth.</p>
+                                        <div class="project-tags"><span>C++17</span><span>OpenMP</span><span>HIP / ROCm</span><span>MI300A</span><span>rocprofv3</span></div>
+                                        <a href="simple-hpc.html" class="btn btn-outline-dark btn-rounded btn-sm mt-2">Read the case study</a>
                                     </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- CHNS DG solver -->
@@ -393,7 +402,7 @@
                                 <ul class="mt-2">
                                     <li>Developed a mathematically well-posed canonical two-fluid model with enhanced physical fidelity, eliminating the mesh-dependent instability of conventional formulations.</li>
                                     <li>Designed a high-order finite-element DG solver with bound-preserving schemes, coupled phase transport, interphase-force and turbulence closures, and adaptive implicit time stepping.</li>
-                                    <li>Verified accuracy with manufactured solutions and validated 3D gas–liquid and liquid–liquid predictions against three independent experimental datasets on national HPC clusters.</li>
+                                    <li>Verified accuracy with manufactured solutions and validated 3D gas–liquid and liquid–liquid predictions against three independent experimental datasets on HPC clusters.</li>
                                 </ul>
                             </div>
                         </div>
