@@ -23,7 +23,7 @@
       "@type": "Person",
       "name": "Arshia Fazeli",
       "url": "https://arfazeli.github.io/",
-      "jobTitle": "PhD Candidate in Chemical Engineering",
+      "jobTitle": "Scientific Software Developer",
       "affiliation": {
         "@type": "CollegeOrUniversity",
         "name": "University of Waterloo"
@@ -40,6 +40,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* project navigation */
+        .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+        .filter-chip { border: 1px solid #d9e5f3; background: #fff; color: #47647e; font-size: .85rem; font-weight: 600;
+            padding: 6px 14px; border-radius: 20px; transition: all .15s ease; }
+        .filter-chip:hover { border-color: #245e91; color: #245e91; }
+        .filter-chip.active { background: #245e91; border-color: #245e91; color: #fff; }
+        .chip-count { font-weight: 500; opacity: .7; margin-left: 2px; }
+        .compact-card { margin-bottom: 0 !important; }
+        .compact-card .card-body { justify-content: flex-start; padding: 1rem 1.1rem 1.2rem; }
+        .compact-card .card-title { font-size: 1rem; line-height: 1.35; }
+        .compact-card .card-text { font-size: .9rem; line-height: 1.55; margin-bottom: .6rem; }
+        .compact-media-wrap { background: #f8f9fa; padding: 10px; }
+        .compact-media { width: 100%; height: 140px; object-fit: contain; border-radius: 6px; display: block; background: #fff; }
+        .compact-placeholder { display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #eef3f9, #dfe9f4); color: #47647e; font-size: .8rem; font-weight: 600; letter-spacing: .03em; }
+        .compact-link { font-size: .85rem; font-weight: 600; color: #245e91; text-decoration: none; margin-top: .75rem; }
+        .compact-link:hover { text-decoration: underline; }
+        .see-all { display: inline-block; font-weight: 600; color: #245e91; text-decoration: none; margin-top: .25rem; }
+        .see-all:hover { text-decoration: underline; }
+        .theme-shortcuts { margin-top: .9rem; font-size: .85rem; color: #666; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+        .theme-shortcuts a { color: #47647e; text-decoration: none; border-bottom: 1px dotted #9fb3c8; }
+        .theme-shortcuts a:hover { color: #245e91; }
+        .project-item.is-hidden { display: none !important; }
+        .filter-empty { color: #666; }
+        .skills-hint { font-size: .85rem; color: #666; margin: -.4rem 0 .9rem; }
+        .skill-chip.has-proj { position: relative; cursor: pointer; }
+        .skill-chip.has-proj:hover, .skill-chip.has-proj:focus-visible { background: #245e91; color: #fff; border-color: #245e91; }
+        .skill-pop { display: none; position: absolute; top: calc(100% + 6px); left: 0; z-index: 20; width: max-content; max-width: 280px;
+            background: #fff; color: #333; border: 1px solid #d9e5f3; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.12);
+            padding: 8px 12px; text-align: left; font-size: .82rem; line-height: 1.45; white-space: normal; }
+        .skill-pop b { display: block; color: #666; font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+        .skill-pop span { display: block; }
+        .skill-pop span + span { margin-top: 4px; }
+        .skill-box { background: #fff; border: 1px solid #e3ebf5; border-radius: 10px; padding: 14px 16px; }
+        .skill-box .skills-label { display: block; min-width: 0; padding: 0; margin-bottom: 10px; text-decoration: none; font-weight: 700; color: #333; }
+        .skill-box a.skills-label:hover { color: #245e91; }
+        .skill-boxes > div:nth-child(even) .skill-pop { left: auto; right: 0; }
+        .skill-chip.has-proj:hover .skill-pop, .skill-chip.has-proj:focus-visible .skill-pop { display: block; }
+    </style>
 </head>
 
 <body>
@@ -68,10 +108,10 @@
                 <p class="connect-label"><strong>Let's Connect</strong></p>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/arshia-fazeli" target="_blank" class="social-link">
-                        🔗 <span>LinkedIn</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="vertical-align:middle;margin-right:2px"><rect width="24" height="24" rx="3" fill="#0A66C2"/><path fill="#fff" d="M5.3 9.3h2.9v9.4H5.3zM6.75 4.6a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM10 9.3h2.8v1.3h.04c.39-.74 1.34-1.52 2.76-1.52 2.95 0 3.5 1.94 3.5 4.47v5.15h-2.9v-4.57c0-1.09-.02-2.49-1.52-2.49-1.52 0-1.75 1.19-1.75 2.41v4.65H10z"/></svg> <span>LinkedIn</span>
                     </a>
                     <a href="https://github.com/arfazeli" target="_blank" class="social-link">
-                        💻 <span>GitHub</span>
+                        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" style="vertical-align:middle;margin-right:2px"><path fill="#181717" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> <span>GitHub</span>
                     </a>
                     <a href="mailto:fazeliarshia@gmail.com" class="social-link">
                         📧 <span>Email</span>
@@ -90,6 +130,11 @@
                         <button class="nav-link active" id="about-tab" data-bs-toggle="tab"
                             data-bs-target="#about" type="button" role="tab"
                             aria-controls="about" aria-selected="true">About</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab"
+                            data-bs-target="#projects" type="button" role="tab"
+                            aria-controls="projects" aria-selected="false">Projects</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="education-tab" data-bs-toggle="tab"
@@ -115,217 +160,238 @@
                         <div class="card about-intro-card">
                             <div class="card-body">
                                 <p class="about-greeting">👋 Hi, I'm Arshia</p>
+                                <p class="about-intro mb-3">
+                                    I'm an engineer and software developer with a PhD from the University of Waterloo. My research
+                                    was on two-fluid models for dispersed multiphase flows. I showed that a physically justified
+                                    laminar dispersion closure adds particle-scale physics that standard models leave out and suppresses
+                                    the mesh-dependent instability of earlier two-fluid models. I validated the models against
+                                    oil&ndash;water pipe-flow and bubble-column experiments. I have also simulated
+                                    industrial equipment, including bioreactors, gas&ndash;liquid separators and combustors,
+                                    in OpenFOAM and Ansys CFX.
+                                </p>
                                 <p class="about-intro">
-                                    I'm a computational scientist and Chemical Engineering PhD candidate at the University of Waterloo.
-                                    I build <strong>scientific software</strong>, <strong>high-order numerical methods</strong>,
-                                    and physically rigorous multiphysics models. My work spans solver architecture,
-                                    bound-preserving algorithms, adaptive methods, automated testing, HPC simulation,
-                                    verification, experimental validation, and applied CFD.
+                                    I write my own solvers in Python and C++. My PhD code is a high-order discontinuous Galerkin
+                                    solver in Python, part of the open-source OpenCMP framework. More recently I wrote a C++ flow
+                                    solver that runs in parallel on CPU clusters and GPUs with MPI, OpenMP, CUDA and HIP.
                                 </p>
                             </div>
                         </div>
 
-                        <h6 class="section-label mt-4 mb-3">Selected Projects</h6>
-
-                        <!-- SIMPLE on CPU and GPU (HPC) -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="simple-hpc.html">
-                                        <img src="assets/simple-hpc/cpu_scaling.png" class="project-img" loading="lazy" decoding="async"
-                                             alt="Strong-scaling speedup of the SIMPLE solver on 32 CPU cores">
-                                    </a>
+                        <h6 class="section-label mt-4 mb-3">Skills</h6>
+                        <p class="skills-hint">Hover over a skill to see where I used it; click to open those projects.</p>
+                        <div class="row g-3 mb-4 skill-boxes">
+                            <div class="col-md-6">
+                                <div class="skill-box h-100">
+                                    <span class="skills-label">Languages &amp; libraries</span>
+                                    <div class="skills-chips"><button type="button" class="skill-chip has-proj" data-p="simple-hpc">C++</button><button type="button" class="skill-chip has-proj" data-p="lbmtorch chns tfm ch limiters euler1d simple-py scgs">Python</button><span class="skill-chip">MATLAB</span><button type="button" class="skill-chip has-proj" data-p="euler1d simple-py scgs">NumPy</button><button type="button" class="skill-chip has-proj" data-p="simple-py">Numba</button><button type="button" class="skill-chip has-proj" data-p="lbmtorch">PyTorch</button><span class="skill-chip">scikit-learn</span><span class="skill-chip">pandas</span><span class="skill-chip">SymPy</span><span class="skill-chip">Matplotlib</span><button type="button" class="skill-chip has-proj" data-p="chns tfm ch limiters">NGSolve</button><span class="skill-chip">pytest</span></div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">An Incompressible Navier&ndash;Stokes Solver Tuned for Multicore CPUs and GPUs</h5>
-                                        <p class="card-text">C++17 SIMPLE solver with OpenMP (25× on 32 cores), NUMA-aware first-touch memory placement, and a HIP/ROCm GPU port 2.7× faster than 8 CPU cores. Profiled with rocprofv3: the hot kernels reach 95% of measured GPU memory bandwidth.</p>
-                                        <div class="project-tags"><span>C++17</span><span>OpenMP</span><span>HIP / ROCm</span><span>MI300A</span><span>rocprofv3</span></div>
-                                        <a href="simple-hpc.html" class="btn btn-outline-dark btn-rounded btn-sm mt-2">Read the case study</a>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="skill-box h-100">
+                                    <a class="skills-label" href="#/projects/dg" data-goto="dg">Numerical methods</a>
+                                    <div class="skills-chips"><button type="button" class="skill-chip has-proj" data-p="simple-hpc euler1d simple-py scgs">Finite volume</button><span class="skill-chip">Finite difference</span><button type="button" class="skill-chip has-proj" data-p="chns tfm ch limiters">FEM</button><button type="button" class="skill-chip has-proj" data-p="chns tfm ch limiters">DG</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">Multigrid</button><button type="button" class="skill-chip has-proj" data-p="limiters">Slope limiters</button></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="skill-box h-100">
+                                    <a class="skills-label" href="#/projects/industrial" data-goto="industrial">CFD</a>
+                                    <div class="skills-chips"><button type="button" class="skill-chip has-proj" data-p="recycle bioreactor">OpenFOAM</button><button type="button" class="skill-chip has-proj" data-p="combustor">Ansys CFX</button><button type="button" class="skill-chip has-proj" data-p="bioreactor">RANS</button><button type="button" class="skill-chip has-proj" data-p="tfm bioreactor">Euler&ndash;Euler multiphase</button><button type="button" class="skill-chip has-proj" data-p="recycle">Population balance</button><button type="button" class="skill-chip has-proj" data-p="chns ch">Phase field</button></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="skill-box h-100">
+                                    <a class="skills-label" href="#/projects/hpc" data-goto="hpc">HPC</a>
+                                    <div class="skills-chips"><button type="button" class="skill-chip has-proj" data-p="simple-hpc">C++17</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">MPI</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">OpenMP</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">NUMA</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">HIP / ROCm</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc lbmtorch">CUDA</button><button type="button" class="skill-chip has-proj" data-p="simple-hpc">rocprofv3</button></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- CHNS DG solver -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/CHNS_DG_solver" target="_blank">
-                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
-                                               poster="assets/chns-poster.jpg" aria-label="CHNS solver sample output">
-                                            <source data-src="assets/chns.mp4" type="video/mp4">
-                                        </video>
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                        <a href="#/projects" class="see-all" data-goto="all">See all 12 projects →</a>
+                    </div>
+
+                    <!-- ── Projects Tab ── -->
+                    <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
+                        <div class="filter-bar" role="group" aria-label="Filter projects by theme">
+                            <button type="button" class="filter-chip active" data-filter="all" aria-pressed="true">All <span class="chip-count"></span></button>
+                            <button type="button" class="filter-chip" data-filter="hpc" aria-pressed="false">HPC &amp; performance <span class="chip-count"></span></button>
+                            <button type="button" class="filter-chip" data-filter="sciml" aria-pressed="false">Scientific ML <span class="chip-count"></span></button>
+                            <button type="button" class="filter-chip" data-filter="dg" aria-pressed="false">High-order DG <span class="chip-count"></span></button>
+                            <button type="button" class="filter-chip" data-filter="industrial" aria-pressed="false">Industrial CFD <span class="chip-count"></span></button>
+                            <button type="button" class="filter-chip" data-filter="foundations" aria-pressed="false">Foundational solvers <span class="chip-count"></span></button>
+                        </div>
+
+                        <div id="compact-group">
+                        <div class="row g-3">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="tfm" data-theme="dg">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <video class="compact-media lazy-video" autoplay muted loop playsinline preload="none" poster="assets/tfm-poster.jpg" aria-label="DG Solver for the Euler–Euler Two-Fluid Model">
+                                    <source data-src="assets/tfm.mp4" type="video/mp4">
+                                </video>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard Navier–Stokes System</h5>
-                                        <p class="card-text">DG finite element solver for the coupled Cahn–Hilliard Navier–Stokes (CHNS) system, simulating the evolution of two immiscible, incompressible fluids separated by a diffuse interface, implemented in Python using NGSolve.</p>
-                                        <a href="https://github.com/arfazeli/CHNS_DG_solver" target="_blank"
-                                        class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">DG Solver for the Euler–Euler Two-Fluid Model</h5>
+                                        <p class="card-text">Two-fluid model for dispersed flows with H(div)/L² spaces, bound preservation and adaptive implicit time stepping.</p>
+                                        <div class="project-tags"><span>NGSolve</span><span>DG-FEM</span><span>Multiphase</span></div>
+                                        <p class="card-text small text-muted mb-0 mt-2">Implemented in OpenCMP.</p>
+                                        <a href="https://github.com/uw-comphys/opencmp" target="_blank" rel="noopener" class="compact-link">OpenCMP on GitHub →</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- TFM DG solver -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
-                                           poster="assets/tfm-poster.jpg" aria-label="DG two-fluid solver animation">
-                                        <source data-src="assets/tfm.mp4" type="video/mp4">
-                                    </video>
-                                </div>
-                                <div class="col-md-8">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="simple-hpc" data-theme="hpc">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="simple-hpc.html"><img src="assets/simple-hpc/cpu_scaling.png" class="compact-media" loading="lazy" decoding="async" alt="Strong-scaling speedup of the SIMPLE solver on 32 CPU cores"></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Discontinuous Galerkin Solver for Euler–Euler Two-Fluid Model</h5>
-                                        <p class="card-text">High-order finite-element DG implementation of a mathematically well-posed canonical two-fluid model with enhanced physical fidelity. Couples phase momentum and volume-fraction transport using mixed <em>H</em>(div)/L<sup>2</sup> spaces, bound-preserving schemes, and adaptive implicit time stepping.</p>
+                                        <h5 class="card-title">An Incompressible Navier&ndash;Stokes Solver Tuned for CPU Clusters and GPUs</h5>
+                                        <p class="card-text">C++17 SIMPLE solver with OpenMP, hybrid MPI+OpenMP to 8 nodes (9.2&times;), and one GPU source for AMD MI300A and NVIDIA H100, bit-identical to the CPU.</p>
+                                        <div class="project-tags"><span>C++17</span><span>MPI</span><span>OpenMP</span><span>HIP / ROCm</span><span>CUDA</span></div>
+                                        <div class="d-flex flex-wrap column-gap-3"><a href="simple-hpc.html" class="compact-link">Case study →</a><a href="https://github.com/arfazeli/simple-hpc" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- CH DG solver -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/CH_DG_solver" target="_blank">
-                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
-                                               poster="assets/ch-poster.jpg" aria-label="Cahn–Hilliard solver sample output">
-                                            <source data-src="assets/ch.mp4" type="video/mp4">
-                                        </video>
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="lbmtorch" data-theme="sciml">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="lbmtorch.html"><video class="compact-media lazy-video" autoplay muted loop playsinline preload="none" poster="assets/lbmtorch/cylinder-card-poster.jpg" aria-label="Vortex shedding behind a cylinder simulated with lbmtorch">
+                                    <source data-src="assets/lbmtorch/cylinder-card.mp4" type="video/mp4">
+                                </video></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Discontinuous Galerkin Solver for Cahn–Hilliard Equation</h5>
-                                        <p class="card-text">DG-based finite element solver for the Cahn–Hilliard phase-field equation, capturing spinodal decomposition dynamics of binary fluid systems, with adaptive mesh refinement driven by a Zienkiewicz–Zhu gradient-recovery error estimator on ∇c.</p>
-                                        <a href="https://github.com/arfazeli/CH_DG_solver" target="_blank"
-                                        class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">A Differentiable Lattice Boltzmann Solver for Inverse Problems and Learned Physics</h5>
+                                        <p class="card-text">Differentiable 2D lattice Boltzmann solver in PyTorch: recovers viscosity, reshapes an obstacle for less drag, and trains a neural collision operator.</p>
+                                        <div class="project-tags"><span>PyTorch</span><span>Lattice Boltzmann</span><span>Scientific ML</span></div>
+                                        <div class="d-flex flex-wrap column-gap-3"><a href="lbmtorch.html" class="compact-link">Case study →</a><a href="https://github.com/arfazeli/lbmtorch" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- DG Limiters -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/DG_limiters" target="_blank">
-                                        <img src="assets/dg-limiter.gif" class="project-img" loading="lazy" decoding="async"
-                                             alt="Kuzmin slope limiter animation">
-                                    </a>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="chns" data-theme="dg">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/CHNS_DG_solver" target="_blank" rel="noopener"><video class="compact-media lazy-video" autoplay muted loop playsinline preload="none" poster="assets/chns-poster.jpg" aria-label="DG Solver for Cahn–Hilliard Navier–Stokes">
+                                    <source data-src="assets/chns.mp4" type="video/mp4">
+                                </video></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">DG Solver for Cahn–Hilliard Navier–Stokes</h5>
+                                        <p class="card-text">Two immiscible fluids separated by a diffuse interface, high-order DG in NGSolve.</p>
+                                        <div class="project-tags"><span>NGSolve</span><span>DG-FEM</span><span>Phase field</span></div>
+                                        <a href="https://github.com/arfazeli/CHNS_DG_solver" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
+                            </div>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="ch" data-theme="dg">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/CH_DG_solver" target="_blank" rel="noopener"><video class="compact-media lazy-video" autoplay muted loop playsinline preload="none" poster="assets/ch-poster.jpg" aria-label="DG Solver for the Cahn–Hilliard Equation">
+                                    <source data-src="assets/ch.mp4" type="video/mp4">
+                                </video></a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">DG Solver for the Cahn–Hilliard Equation</h5>
+                                        <p class="card-text">Spinodal decomposition with adaptive mesh refinement from a Zienkiewicz–Zhu error estimator.</p>
+                                        <div class="project-tags"><span>NGSolve</span><span>DG-FEM</span><span>AMR</span></div>
+                                        <a href="https://github.com/arfazeli/CH_DG_solver" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="limiters" data-theme="dg">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/DG_limiters" target="_blank" rel="noopener"><img src="assets/dg-limiter.gif" class="compact-media" loading="lazy" decoding="async" alt="DG Slope Limiters for High-Order Schemes"></a>
+                                    </div>
                                     <div class="card-body">
                                         <h5 class="card-title">DG Slope Limiters for High-Order Schemes</h5>
-                                        <p class="card-text">Slope limiters for high-order discontinuous Galerkin (DG) schemes on triangular and tetrahedral meshes, implemented in NGSolve. Implements Barth–Jespersen, Venkatakrishnan, and Kuzmin vertex-based limiters to suppress spurious oscillations near steep gradients while preserving cell conservation.</p>
-                                        <a href="https://github.com/arfazeli/DG_limiters" target="_blank"
-                                           class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <p class="card-text">Barth–Jespersen, Venkatakrishnan and Kuzmin limiters on triangles and tetrahedra, cell-conservative.</p>
+                                        <div class="project-tags"><span>NGSolve</span><span>DG-FEM</span><span>Limiters</span></div>
+                                        <a href="https://github.com/arfazeli/DG_limiters" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Ebullated-bed reactor -->
-                        <div class="card mb-3 applied-project">
-                                    <div class="card-body text-project-body">
-                                        <h5 class="card-title">Recycle-Cup Gas–Liquid Separation for Bitumen Hydroprocessing</h5>
-                                        <p class="card-text">Recreated a three-dimensional pilot-scale ebullated-bed reactor to assess gas entrainment in an internal recycle line. Implemented feedback-controlled recycle-outlet conditions and a population balance to study bubble-size effects on gas hold-up, interphase momentum exchange, and hydrodynamics.</p>
-                                        <div class="project-tags"><span>OpenFOAM</span><span>Multiphase CFD</span><span>Feedback control</span><span>Population balance</span></div>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="recycle" data-theme="industrial">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <div class="compact-media compact-placeholder"><span>OpenFOAM · ebullated bed</span></div>
                                     </div>
-                        </div>
-
-                        <!-- Aerated bioreactor -->
-                        <div class="card mb-3 applied-project">
-                                    <div class="card-body text-project-body">
-                                        <h5 class="card-title">Industrial-Scale Aerated Bioreactor</h5>
-                                        <p class="card-text">Modelled a 2.08 m diameter, 7.55 m tall vessel with four six-blade impellers using Euler–Euler/PIMPLE, <em>k</em>–ε and bubble-induced turbulence, and multiple reference frames at 120 rpm. Evaluated liquid circulation and gas-volume-fraction distributions throughout the vessel.</p>
-                                        <div class="project-tags"><span>OpenFOAM</span><span>Euler–Euler</span><span>RANS</span><span>Rotating machinery</span></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Recycle-Cup Gas–Liquid Separation</h5>
+                                        <p class="card-text">Pilot-scale ebullated-bed reactor: gas entrainment, feedback-controlled outlets and population balance.</p>
+                                        <div class="project-tags"><span>OpenFOAM</span><span>Multiphase CFD</span><span>Population balance</span></div>
+                                        
                                     </div>
-                        </div>
-
-                        <!-- Combustor -->
-                        <div class="card mb-3 applied-project">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <img src="assets/me556_project.png" class="project-img" loading="lazy" decoding="async"
-                                         alt="Side-Dump Combustor CFD">
                                 </div>
-                                <div class="col-md-8">
+                            </div>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="bioreactor" data-theme="industrial">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <div class="compact-media compact-placeholder"><span>OpenFOAM · bioreactor</span></div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Industrial-Scale Aerated Bioreactor</h5>
+                                        <p class="card-text">7.55 m vessel with four impellers: Euler–Euler, k–ε with bubble-induced turbulence, rotating frames.</p>
+                                        <div class="project-tags"><span>OpenFOAM</span><span>Euler–Euler</span><span>RANS</span></div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="combustor" data-theme="industrial">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <img src="assets/me556_project.png" class="compact-media" loading="lazy" decoding="async" alt="Side-Dump Combustor with Variable Inlet Angles">
+                                    </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Side-Dump Combustor with Variable Inlet Angles</h5>
-                                        <p class="card-text">Simulated turbulent airflow and mixing using Ansys CFX, validated velocity and turbulence predictions against experiments, and performed systematic mesh refinement to distinguish discretization and modelling errors.</p>
-                                        <div class="project-tags"><span>Ansys CFX</span><span>Turbulence</span><span>Validation</span><span>Mesh study</span></div>
+                                        <p class="card-text">Turbulent mixing in Ansys CFX, validated against experiments with a systematic mesh study.</p>
+                                        <div class="project-tags"><span>Ansys CFX</span><span>Turbulence</span><span>Validation</span></div>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- 1D Euler FVS -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/1D_Euler_FVS" target="_blank">
-                                        <video class="project-img project-video lazy-video" autoplay muted loop playsinline preload="none"
-                                               poster="assets/euler-poster.jpg" aria-label="1D Euler solver animation">
-                                            <source data-src="assets/euler.mp4" type="video/mp4">
-                                        </video>
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="euler1d" data-theme="foundations">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/1D_Euler_FVS" target="_blank" rel="noopener"><video class="compact-media lazy-video" autoplay muted loop playsinline preload="none" poster="assets/euler-poster.jpg" aria-label="1D Euler Solver with Flux Vector Splitting">
+                                    <source data-src="assets/euler.mp4" type="video/mp4">
+                                </video></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">1D Euler Equations Solver using Flux Vector Splitting</h5>
-                                        <p class="card-text">Finite-volume method solver for the 1D compressible Euler equations using Steger-Warming and Van Leer flux vector splitting schemes. Includes symbolic derivations and shock tube visualizations.</p>
-                                        <a href="https://github.com/arfazeli/1D_Euler_FVS" target="_blank"
-                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">1D Euler Solver with Flux Vector Splitting</h5>
+                                        <p class="card-text">Steger–Warming and Van Leer schemes for the shock tube, with symbolic derivations.</p>
+                                        <div class="project-tags"><span>Python</span><span>Finite volume</span><span>Compressible</span></div>
+                                        <a href="https://github.com/arfazeli/1D_Euler_FVS" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- SIMPLE FVM -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE" target="_blank">
-                                        <img src="assets/simple-solver.png" class="project-img" loading="lazy" decoding="async"
-                                             alt="INS-SIMPLE solver output">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="simple-py" data-theme="foundations">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE" target="_blank" rel="noopener"><img src="assets/simple-solver.png" class="compact-media" loading="lazy" decoding="async" alt="SIMPLE Solver with Scalar Transport and Reaction"></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Steady Incompressible Navier-Stokes Solvers with Scalar Transport and Reaction Using SIMPLE Algorithm</h5>
-                                        <p class="card-text">Finite-volume method solvers for the 2D incompressible Navier–Stokes equations using SIMPLE for velocity–pressure coupling, extended to include scalar transport and reaction source terms with Numba JIT compilation.</p>
-                                        <a href="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE" target="_blank"
-                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">SIMPLE Solver with Scalar Transport and Reaction</h5>
+                                        <p class="card-text">2D incompressible Navier–Stokes with SIMPLE coupling, scalar transport and reaction, Numba-accelerated.</p>
+                                        <div class="project-tags"><span>Python</span><span>Numba</span><span>Finite volume</span></div>
+                                        <a href="https://github.com/arfazeli/IncompressibleMCNS_SIMPLE" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- INS SCGS FVM -->
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4 project-img-wrap">
-                                    <a href="https://github.com/arfazeli/IncompressibleNS_SCGS" target="_blank">
-                                        <img src="assets/scgs-solver.png" class="project-img" loading="lazy" decoding="async"
-                                             alt="INS SCGS profiles">
-                                    </a>
-                                </div>
-                                <div class="col-md-8">
+                            <div class="col-sm-6 col-lg-4 project-item" data-id="scgs" data-theme="foundations">
+                                <div class="card compact-card h-100">
+                                    <div class="compact-media-wrap">
+                                <a href="https://github.com/arfazeli/IncompressibleNS_SCGS" target="_blank" rel="noopener"><img src="assets/scgs-solver.png" class="compact-media" loading="lazy" decoding="async" alt="Incompressible Navier–Stokes with SCGS"></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Incompressible Navier-Stokes Solver using SCGS Algorithm</h5>
-                                        <p class="card-text">Finite-volume method solver for the 2D incompressible Navier-Stokes equations implemented using the Symmetric Coupled Gauss–Seidel (SCGS) method.</p>
-                                        <a href="https://github.com/arfazeli/IncompressibleNS_SCGS.git" target="_blank"
-                                            class="btn btn-outline-dark btn-rounded btn-sm mt-2">View Project</a>
+                                        <h5 class="card-title">Incompressible Navier–Stokes with SCGS</h5>
+                                        <p class="card-text">2D incompressible solver using Symmetric Coupled Gauss–Seidel.</p>
+                                        <div class="project-tags"><span>Python</span><span>Finite volume</span></div>
+                                        <a href="https://github.com/arfazeli/IncompressibleNS_SCGS" target="_blank" rel="noopener" class="compact-link">View on GitHub →</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        </div>
+                        <p class="filter-empty" hidden>No projects in this category yet.</p>
                     </div>
 
                     <!-- ── Education Tab ── -->
@@ -338,7 +404,7 @@
                                         <h5 class="card-title">PhD in Chemical Engineering</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
                                     </div>
-                                    <span class="date-badge">Sept 2021 – Sept 2026 (Expected)</span>
+                                    <span class="date-badge">Sept 2021 – Oct 2026</span>
                                 </div>
                                 <p class="card-text mt-2">
                                     <strong>Grade:</strong> 92.67 &nbsp;|&nbsp;
@@ -397,10 +463,10 @@
                                         <h5 class="card-title">Computational Multiphysics Researcher</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">University of Waterloo, ON, Canada</h6>
                                     </div>
-                                    <span class="date-badge">Sept 2021 – Present</span>
+                                    <span class="date-badge">Sept 2021 – Oct 2026</span>
                                 </div>
                                 <ul class="mt-2">
-                                    <li>Developed a mathematically well-posed canonical two-fluid model with enhanced physical fidelity, eliminating the mesh-dependent instability of conventional formulations.</li>
+                                    <li>Compared canonical two-fluid formulations and laminar dispersion closures, and showed that a physically justified laminar dispersion closure improves agreement with experiments and suppresses the mesh-dependent oscillations of earlier formulations.</li>
                                     <li>Designed a high-order finite-element DG solver with bound-preserving schemes, coupled phase transport, interphase-force and turbulence closures, and adaptive implicit time stepping.</li>
                                     <li>Verified accuracy with manufactured solutions and validated 3D gas–liquid and liquid–liquid predictions against three independent experimental datasets on HPC clusters.</li>
                                 </ul>
@@ -508,6 +574,76 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // theme filters with shareable links (#/projects/<theme>)
+        const chipsEl = document.querySelectorAll('.filter-chip');
+        const items = document.querySelectorAll('#projects .project-item');
+        const showTab = (id) => bootstrap.Tab.getOrCreateInstance(document.getElementById(id + '-tab')).show();
+
+        chipsEl.forEach((chip) => {
+            const k = chip.dataset.filter;
+            const n = k === 'all' ? items.length : [...items].filter((i) => i.dataset.theme === k).length;
+            chip.querySelector('.chip-count').textContent = n;
+        });
+
+        const applyFilter = (k) => {
+            let shown = 0;
+            items.forEach((i) => {
+                const hide = Array.isArray(k) ? !k.includes(i.dataset.id) : k !== 'all' && i.dataset.theme !== k;
+                i.classList.toggle('is-hidden', hide);
+                if (!hide) shown++;
+            });
+            chipsEl.forEach((c) => {
+                const on = c.dataset.filter === k;
+                c.classList.toggle('active', on);
+                c.setAttribute('aria-pressed', on);
+            });
+            ['compact-group'].forEach((g) => {
+                const el = document.getElementById(g);
+                el.hidden = !el.querySelector('.project-item:not(.is-hidden)');
+            });
+            document.querySelector('.filter-empty').hidden = shown > 0;
+        };
+
+        const go = (k) => {
+            applyFilter(k);
+            showTab('projects');
+            history.replaceState(null, '', k === 'all' || Array.isArray(k) ? '#/projects' : '#/projects/' + k);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        chipsEl.forEach((c) => c.addEventListener('click', () => go(c.dataset.filter)));
+
+        // skill chips: hover lists the projects that use the skill, click shows only those projects
+        const titleOf = (id) => document.querySelector(`#projects [data-id="${id}"] .card-title`).textContent;
+        document.querySelectorAll('.skill-chip.has-proj').forEach((c) => {
+            const ids = c.dataset.p.split(' ');
+            const pop = document.createElement('span');
+            pop.className = 'skill-pop';
+            pop.innerHTML = '<b>Used in</b>';
+            ids.forEach((id) => { const t = document.createElement('span'); t.textContent = titleOf(id); pop.append(t); });
+            c.append(pop);
+            c.addEventListener('click', () => go(ids));
+        });
+        document.querySelectorAll('[data-goto]').forEach((a) => a.addEventListener('click', (e) => {
+            e.preventDefault();
+            go(a.dataset.goto);
+        }));
+
+        // keep the address bar in sync with the active tab, and open the tab named in the link
+        document.querySelectorAll('#myTab .nav-link').forEach((t) => t.addEventListener('shown.bs.tab', () => {
+            const id = t.dataset.bsTarget.slice(1);
+            if (!(id === 'projects' && location.hash.startsWith('#/projects'))) {
+                history.replaceState(null, '', id === 'about' ? location.pathname : '#/' + id);
+            }
+        }));
+        // links look like #/projects/hpc: no element has that id, so the browser never jumps
+        const [tab, theme] = location.hash.replace(/^#\/?/, '').split('/');
+        if (document.getElementById(tab + '-tab')) {
+            showTab(tab);
+            if (tab === 'projects') applyFilter(theme || 'all');
+        }
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differentiable Lattice Boltzmann | Arshia Fazeli</title>
+    <meta name="description" content="A lattice Boltzmann flow solver in PyTorch that is differentiable end to end: viscosity recovered from sparse data, an obstacle reshaped for lower drag, and a neural collision operator trained through the solver.">
+    <meta name="author" content="Arshia Fazeli">
+    <link rel="canonical" href="https://arfazeli.github.io/lbmtorch.html">
+    <meta property="og:title" content="Differentiable Lattice Boltzmann | Arshia Fazeli">
+    <meta property="og:description" content="Inverse problems, shape optimisation and solver-in-the-loop learning with a validated, differentiable lattice Boltzmann solver in PyTorch.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://arfazeli.github.io/lbmtorch.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case { max-width: 940px; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+        .case h1 { font-size: 2rem; line-height: 1.2; }
+        .case h2 { font-size: 1.35rem; font-weight: 700; color: #1d1d1f; margin: 2.75rem 0 .6rem; }
+        .case .lead { font-size: 1.05rem; color: #444; }
+        .case p, .case li { line-height: 1.65; }
+        .back { font-size: .9rem; color: #555; text-decoration: none; }
+        .back:hover { color: #000; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 1.75rem 0 .5rem; }
+        .stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.1rem; }
+        .stat .num { font-size: 1.9rem; font-weight: 700; color: #1d1d1f; line-height: 1.1; font-variant-numeric: tabular-nums; }
+        .stat .lbl { font-size: .85rem; color: #555; margin-top: .3rem; }
+        figure { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; margin: 1rem 0 1.25rem; }
+        figure img, figure video { width: 100%; height: auto; display: block; }
+        figure.narrow img { max-width: 620px; margin: 0 auto; }
+        figcaption { font-size: .85rem; color: #555; margin-top: .6rem; }
+        .callout { border-left: 3px solid #2a78d6; background: #fff; padding: .8rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .case table { width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums; margin: .5rem 0 1rem; }
+        .case th, .case td { padding: .35rem .5rem; border-bottom: 1px solid #e5e7eb; }
+        @media (max-width: 720px) { .case h1 { font-size: 1.6rem; } }
+        code { color: #b4361b; }
+    </style>
+</head>
+
+<body>
+    <main class="case">
+        <a class="back" href="index.html">← All projects</a>
+
+        <h1 class="mt-3">A differentiable lattice Boltzmann solver for inverse problems and learned physics</h1>
+        <p class="lead">A 2D lattice Boltzmann flow solver written in PyTorch, where every operation in the time
+            loop is a tensor operation. Automatic differentiation therefore gives exact gradients of any output with
+            respect to viscosity, forcing, initial state or wall shape, through the whole time loop. I validated
+            the solver against analytic and published benchmarks, then used those gradients for three tasks:
+            recovering an unknown viscosity from sparse data, reshaping an obstacle for lower drag, and training a
+            neural collision operator with the solver in the loop.</p>
+        <div class="project-tags">
+            <span>Python</span><span>PyTorch</span><span>Autograd</span><span>Lattice Boltzmann</span><span>Inverse problems</span>
+            <span>Shape optimisation</span><span>Scientific ML</span><span>CUDA / MPS</span><span>pytest</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><div class="num">2.0</div><div class="lbl">measured order of spatial convergence (Taylor&ndash;Green: 2.008, 2.001)</div></div>
+            <div class="stat"><div class="num">&lt;10<sup>&minus;3</sup></div><div class="lbl">error in viscosity recovered from 10% of the nodes</div></div>
+            <div class="stat"><div class="num">13%</div><div class="lbl">less drag from gradient-based shape optimisation at fixed area</div></div>
+            <div class="stat"><div class="num">6&times;</div><div class="lbl">lower error from a learned collision operator, on held-out flows</div></div>
+        </div>
+
+        <h2>Correct first</h2>
+        <p>The solver implements the D2Q9 lattice with BGK, TRT, MRT and Smagorinsky collision models, Guo body forcing,
+            bounce-back walls (including second-order Bouzidi walls for curved boundaries), Zou&ndash;He inlets and outlets,
+            and the hydrodynamic force on bodies. Each feature ships with a test against an analytic solution or a published
+            benchmark, with a stated tolerance: Poiseuille flow, Taylor&ndash;Green decay with second-order convergence,
+            the lid-driven cavity against Ghia et&nbsp;al. (1982), and the Sch&auml;fer&ndash;Turek cylinder benchmark.</p>
+        <figure>
+            <img src="assets/lbmtorch/cavity.png" loading="lazy" decoding="async"
+                 alt="Lid-driven cavity at Re 100: velocity magnitude with streamlines, and the vertical centreline velocity against Ghia et al. reference points">
+            <figcaption>Lid-driven cavity at Re&nbsp;100. The centreline velocity matches Ghia et&nbsp;al. to within 0.006.</figcaption>
+        </figure>
+        <figure>
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/lbmtorch/cylinder-poster.jpg"
+                   aria-label="Vorticity in the wake of a cylinder at Re 100 showing periodic vortex shedding">
+                <source src="assets/lbmtorch/cylinder.mp4" type="video/mp4">
+            </video>
+            <figcaption>Vortex shedding behind a cylinder, Sch&auml;fer&ndash;Turek 2D-2 at Re&nbsp;100, on a GPU (Apple MPS).
+                Strouhal number 0.302 (reference 0.295&ndash;0.305). Drag 3.25 and peak lift 0.94 fall just outside the
+                reference bands (3.22&ndash;3.24 and 0.99&ndash;1.01) at this resolution of 20 cells per diameter.</figcaption>
+        </figure>
+
+        <h2>Making a time-stepping solver differentiable</h2>
+        <p>Autograd only works if nothing in the time loop breaks the graph. A few rules make that hold:</p>
+        <ul>
+            <li>No in-place writes. Boundary conditions build their result with <code>torch.where</code> and
+                <code>torch.stack</code> instead of overwriting entries.</li>
+            <li>Solid nodes keep finite values. A NaN in a branch that <code>torch.where</code> discards still poisons
+                the gradient.</li>
+            <li>Curved walls come from a level set, so the wall position is a continuous tensor rather than a set of
+                cells, and gradients reach the geometry.</li>
+            <li>Gradient checkpointing stores only every <em>k</em>-th state and recomputes the rest during the
+                backward pass, so memory grows with the number of checkpoints, not the number of steps.</li>
+        </ul>
+        <p>Every differentiable path is checked against finite differences with <code>torch.autograd.gradcheck</code>
+            in double precision.</p>
+
+        <h2>Recovering viscosity from sparse data</h2>
+        <p>A Taylor&ndash;Green vortex decays with an unknown viscosity. The velocity is observed once, after 60 steps,
+            at 10% of the nodes, with 0.5% noise. Gradients of the misfit come from backpropagating through all 60 steps,
+            and L-BFGS recovers the relaxation time to better than 10<sup>&minus;3</sup>. The relaxation time is stored
+            as 1/2 + softplus(&theta;), so no optimiser step can leave the stable region.</p>
+        <figure class="narrow">
+            <img src="assets/lbmtorch/inverse_viscosity.png" loading="lazy" decoding="async"
+                 alt="Misfit versus relaxation time with a single sharp minimum at the true value, and L-BFGS iterates reaching it in a few steps">
+            <figcaption>The misfit has one clean minimum. L-BFGS reaches it in a few evaluations; Adam with a fixed step
+                oscillated around it.</figcaption>
+        </figure>
+
+        <h2>Shape optimisation through the wall geometry</h2>
+        <p>An obstacle in a channel is described by an ellipse level set with its area held fixed. The drag comes from
+            the momentum exchanged at the wall, and its gradient reaches the aspect ratio through the second-order wall
+            model. Gradient descent lengthens the body along the flow and cuts drag by 13%. No adjoint solver had to be
+            written: here the adjoint is autograd.</p>
+        <figure>
+            <img src="assets/lbmtorch/inverse_design.png" loading="lazy" decoding="async"
+                 alt="Velocity field around the starting circle and the optimised ellipse, and normalised drag falling from 1.0 to 0.87 as the aspect ratio grows to 2.4">
+            <figcaption>From a circle to an ellipse of aspect ratio 2.4 at equal area; drag falls to 0.87 of its initial value.</figcaption>
+        </figure>
+
+        <h2>Learning a collision operator with the solver in the loop</h2>
+        <p>The collision step is a local map, so a neural network can correct it. The model keeps standard MRT and adds
+            a small MLP correction that only touches moments the physics leaves free, so mass and momentum are conserved
+            exactly whatever the weights are. The last layer starts at zero, so the untrained model is exactly MRT. Training
+            unrolls 30 solver steps on a coarse Taylor&ndash;Green flow, compares with the analytic solution and
+            backpropagates through the whole trajectory.</p>
+        <figure>
+            <img src="assets/lbmtorch/learned_collision.png" loading="lazy" decoding="async"
+                 alt="Left: training loss falling over 150 iterations. Right: velocity error over time for MRT and the learned model on the training case, a held-out case, and a run twice as long">
+            <figcaption>Left: training loss. Right: the error drops about 6&times; on the training flow and on a held-out flow
+                with a different amplitude and phase. Run twice as long as it was trained for, the model over-corrects (green).</figcaption>
+        </figure>
+        <div class="callout">
+            <strong>Match the training horizon to the deployment horizon.</strong> The model learned to cancel the error
+            <em>by step 30</em>, not to be a better collision operator in general. A model trained on 30 steps beats MRT
+            at 30 but is worse at 60; one trained on 60 steps reverses that. Gradient checkpointing is what makes long
+            training horizons affordable.
+        </div>
+        <table>
+            <thead><tr><th>Model</th><th>error at 30 steps</th><th>60 steps</th><th>120 steps</th></tr></thead>
+            <tbody>
+                <tr><td>MRT</td><td>2.40e-2</td><td>2.35e-2</td><td>2.28e-2</td></tr>
+                <tr><td>learned, 30-step horizon</td><td>3.66e-3</td><td>2.46e-2</td><td>4.68e-2</td></tr>
+                <tr><td>learned, 60-step horizon</td><td>1.23e-2</td><td>8.09e-3</td><td>2.72e-2</td></tr>
+            </tbody>
+        </table>
+
+        <h2>How it is built</h2>
+        <ul>
+            <li><strong>Small, typed interfaces:</strong> a collision model or a boundary condition is any function with the
+                right signature, and learned models are ordinary <code>torch.nn.Module</code>s.</li>
+            <li><strong>One code path on every device:</strong> the same tensor code runs on CPU, CUDA and Apple MPS, in
+                single or double precision.</li>
+            <li><strong>Validation as tests:</strong> pytest runs the analytic and benchmark checks and the gradient checks on
+                every change.</li>
+        </ul>
+
+        <!-- TODO: point this at the public repository once it is published -->
+        <a href="https://github.com/arfazeli/lbmtorch" target="_blank"
+           class="btn btn-outline-dark btn-rounded mt-3">View on GitHub</a>
+    </main>
+</body>
+
+</html>

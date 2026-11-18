@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMPLE on CPU and GPU | Arshia Fazeli</title>
-    <meta name="description" content="A C++17 SIMPLE CFD solver tuned for multicore CPUs and AMD MI300A GPUs: OpenMP strong scaling, NUMA-aware memory placement, a HIP GPU port, and rocprofv3 profiling.">
+    <meta name="description" content="A C++17 SIMPLE CFD solver tuned for CPU clusters and GPUs: OpenMP and hybrid MPI scaling across nodes, NUMA-aware memory placement, one GPU source for AMD MI300A (HIP) and NVIDIA H100 (CUDA), and rocprofv3 profiling.">
     <meta name="author" content="Arshia Fazeli">
     <link rel="canonical" href="https://arfazeli.github.io/simple-hpc.html">
     <meta property="og:title" content="SIMPLE on CPU and GPU | Arshia Fazeli">
-    <meta property="og:description" content="OpenMP, NUMA, HIP/ROCm and profiler-driven tuning of a C++17 CFD solver on Intel Xeon and AMD MI300A hardware.">
+    <meta property="og:description" content="OpenMP, MPI, NUMA, HIP/CUDA and profiler-driven tuning of a C++17 CFD solver on Intel Xeon, AMD MI300A and NVIDIA H100 hardware.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://arfazeli.github.io/simple-hpc.html">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,26 +41,28 @@
     <main class="case">
         <a class="back" href="index.html">← All projects</a>
 
-        <h1 class="mt-3">An incompressible Navier&ndash;Stokes solver tuned for multicore CPUs and GPUs</h1>
+        <h1 class="mt-3">An incompressible Navier&ndash;Stokes solver tuned for CPU clusters and GPUs</h1>
         <p class="lead">A C++17 finite-volume SIMPLE solver for the lid-driven cavity (staggered grid, QUICK
             convection, multigrid pressure correction). I parallelised it with OpenMP, made its memory
-            placement NUMA-aware, and ported it to the GPU with HIP. Every step is measured on a dual-socket
-            Intel Xeon 6972P node and an AMD MI300A, against a memory-bandwidth baseline taken on the same hardware.</p>
+            placement NUMA-aware, distributed it across cluster nodes with MPI, and ported it to AMD and NVIDIA
+            GPUs from one HIP source. Every step is measured on dual-socket Intel Xeon 6972P nodes, an AMD MI300A
+            and an NVIDIA H100, against a memory-bandwidth baseline taken on the same hardware.</p>
         <div class="project-tags">
-            <span>C++17</span><span>OpenMP</span><span>HIP / ROCm</span><span>AMD MI300A</span>
+            <span>C++17</span><span>OpenMP</span><span>MPI</span><span>HIP / ROCm</span><span>CUDA</span><span>AMD MI300A</span><span>NVIDIA H100</span>
             <span>rocprofv3</span><span>NUMA</span><span>Slurm</span><span>Catch2</span>
         </div>
 
         <div class="stats">
             <div class="stat"><div class="num">25×</div><div class="lbl">strong-scaling speedup on 32 cores (512² grid)</div></div>
-            <div class="stat"><div class="num">2.7×</div><div class="lbl">MI300A GPU vs 8 CPU cores, same converged answer</div></div>
+            <div class="stat"><div class="num">9.2×</div><div class="lbl">from 1 to 8 nodes (1536 cores), hybrid MPI+OpenMP, 8192² grid</div></div>
+            <div class="stat"><div class="num">3</div><div class="lbl">architectures, one bit-identical answer: CPU, AMD MI300A (HIP), NVIDIA H100 (CUDA)</div></div>
             <div class="stat"><div class="num">95%</div><div class="lbl">of measured GPU memory bandwidth reached by the hot kernels</div></div>
             <div class="stat"><div class="num">1.26×</div><div class="lbl">from NUMA-aware memory placement alone (4096², 32 threads)</div></div>
         </div>
 
         <h2>Correct first</h2>
         <p>Speed only counts if the answer is right. The solver reproduces the Ghia et&nbsp;al. (1982) benchmark
-            at Re&nbsp;400 and Re&nbsp;1000. The validation runs are part of the test suite (68 tests, run on the cluster),
+            at Re&nbsp;400 and Re&nbsp;1000. The validation runs are part of the test suite (74 tests, run on the cluster),
             and snapshot tests pin the numerics so that no optimisation can quietly change results.</p>
         <figure>
             <img src="assets/simple-hpc/re1000_128.png" loading="lazy" decoding="async"
@@ -91,14 +93,49 @@
                 the mechanism. Applying the same fix to the multigrid arrays makes the pressure solve up to 1.31× faster (right).</figcaption>
         </figure>
 
-        <h2>Porting to the GPU</h2>
-        <p>The HIP backend runs the whole outer iteration on the MI300A, with all fields resident on the device
-            and one thread per cell. Reductions use a fixed-order block tree, so runs are deterministic, and tests check
-            each GPU phase against the CPU code.</p>
+        <h2>Scaling across nodes with MPI</h2>
+        <p>Each MPI rank owns a block of a 2D domain decomposition and exchanges two-cell halos with its
+            neighbours; inside the colour sweeps the halo messages travel while the rank updates its interior cells.
+            Global sums add their terms in a fixed order, so the fields and residual history are bit-identical to
+            the single-rank run on every rank count tested. The best layout is hybrid: one rank per NUMA domain,
+            with OpenMP threads filling it.</p>
+        <figure>
+            <img src="assets/simple-hpc/mpi_strong.png" loading="lazy" decoding="async"
+                 alt="Speedup versus number of nodes, 1 to 8, for 4096 and 8192 squared grids, hybrid and pure MPI, against an ideal line">
+            <figcaption>Fixed grid, 1&ndash;8 nodes of 192 cores, median of 3. Above ideal because each node's share of
+                the grid gets cheaper per cell as it shrinks, the same cache effect as in the single-node scaling.</figcaption>
+        </figure>
+        <p>The first multi-node runs spent 14% of their time in halo exchange, even on a single node where no message
+            crosses the network, and the slowest rank waited 2.5&times; longer than the average. Per-rank timers traced
+            it to the multigrid solver: rank boundaries must align with its coarse grids, and with 6 NUMA domains per node
+            that left the blocks 12.5% uneven, so the smaller ranks idled at every exchange. Choosing the alignment level
+            by the least work per rank cut the halo wait by 74% and made every hybrid run 10&ndash;17% faster, with the
+            same bit-identical answer.</p>
+        <figure>
+            <img src="assets/simple-hpc/mpi_comm.png" loading="lazy" decoding="async"
+                 alt="Stacked bars of compute, halo exchange and collective time fractions for 1, 2, 4 and 8 nodes, hybrid and pure MPI">
+            <figcaption>8192² grid. Hybrid keeps 56% of its time in compute on 8 nodes; with one rank per core, global
+                reductions and the coarse-grid gather grow to 48% of the time.</figcaption>
+        </figure>
+        <div class="callout">
+            <strong>Hybrid beats pure MPI at scale.</strong> Weak-scaling efficiency on 8 nodes is 71% with one rank per
+            NUMA domain and 43% with one rank per core, because every rank takes part in the global reductions and
+            receives the gathered coarse grid. At 4096² pure MPI gets slower from 4 to 8 nodes, with 74% of its time
+            in collectives, while hybrid is 1.7&times; faster. Fewer, fatter ranks keep that cost down.
+        </div>
+
+        <h2>One GPU source for AMD and NVIDIA</h2>
+        <p>The GPU backend runs the whole outer iteration on the device, with all fields resident and one thread
+            per cell. It is written once in HIP: on AMD it builds with ROCm, and on NVIDIA a small header maps the
+            runtime calls to CUDA and nvcc compiles the same kernels. Fused multiply-adds are switched off on both,
+            as on the CPU, so every phase of the iteration matches the CPU code bit for bit on the MI300A and on the
+            H100, and tests check that on every build.</p>
         <figure>
             <img src="assets/simple-hpc/gpu_vs_cpu.png" loading="lazy" decoding="async"
-                 alt="Time to solution: 5.83 seconds on 8 CPU cores versus 2.19 seconds on one MI300A GPU">
-            <figcaption>Re&nbsp;1000, 128² grid, solved to convergence in 5919 outer iterations on both devices.</figcaption>
+                 alt="Time to solution at Re 1000 on a 128 squared grid: AMD MI300A 2.17 seconds and NVIDIA H100 1.79 seconds, each beside the 8 CPU cores of its own node">
+            <figcaption>Re&nbsp;1000, 128² grid, solved to convergence in the same 5919 outer iterations with the same
+                answer on all four devices. Single runs; each GPU is compared with the CPU of its own node, since the
+                two nodes have different CPUs.</figcaption>
         </figure>
 
         <h2>Profiling: where the GPU time goes</h2>
